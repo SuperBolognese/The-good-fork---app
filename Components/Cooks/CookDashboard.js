@@ -1,5 +1,7 @@
 import { useLinkProps } from '@react-navigation/native';
 import React, {Component} from 'react';
+import Config from '../../config.json';
+
 import { FlatList, StyleSheet } from 'react-native';
 import DishListComponent from './DishListComponent';
 

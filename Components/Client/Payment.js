@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Config from '../../config.json';
 import { StyleSheet, View, Text, Image, TextInput, Button} from 'react-native';
 
 class Payment extends Component {

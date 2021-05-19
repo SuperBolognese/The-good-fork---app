@@ -1,5 +1,7 @@
 import { useLinkProps } from '@react-navigation/native';
 import React, {Component} from 'react';
+import Config from '../../config.json';
+
 import { FlatList, StyleSheet } from 'react-native';
 import CommandListComponent from './CommandListComponent';
 
@@ -25,6 +27,7 @@ class WaiterDashboard extends Component {
     render() {
         return (
             <FlatList 
+                style={styles.list_container}
                 data = {this.state.donnees}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => <CommandListComponent name={item.name} destination={item.destination} />}
@@ -33,11 +36,10 @@ class WaiterDashboard extends Component {
     }
 }
 
-// const styles = StyleSheet.create({
-//     list_container: {
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     }
-// })
+const styles = StyleSheet.create({
+    list_container: {
+        marginTop: 50
+    }
+})
 
 export default WaiterDashboard;

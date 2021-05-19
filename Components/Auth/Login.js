@@ -1,48 +1,107 @@
 import React, { Component } from 'react';
+import Config from '../../config.json';
 import { StyleSheet, View, Text, Image, TextInput, Button} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NavBar from '../Shared/Navbar';
 
 class Login extends Component {
 
     constructor() {
         super();
-        this.state = {
-            email: "",
-            username: ""
+
+        this.email = "";
+        this.password = "";
+
+        this._handleSubmit = this._handleSubmit.bind(this);
+    }
+
+    _handleSubmit(event) {
+        const userData = {
+            email: this.email,
+            password: this.password
+        };
+        this._loginUser(userData);
+        event.preventDefault();
+    }
+
+    _loginUser(userdata){
+        fetch(Config.baseURL + "/api/Users/Login", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userdata)  
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.setStorageValue('firstName', res.firstName);
+            this.setStorageValue('job', res.job);
+            this.setStorageValue('token', res.token);
+            this.checkUserJob(res.job);
+        })
+        .catch((error) => console.error(error))
+    }
+
+    setStorageValue = async (key, value) => {
+        try {
+            await AsyncStorage.setItem(key, value)
+        } catch(e) {
+            console.log("Error : " + e);
         }
     }
 
-    _loginUser(){
-        console.log("IUI");
+    checkUserJob(job) {
+        if (job === "waiter") {
+            this.props.navigation.navigate('WaiterDashboard')
+        } else if (job === 'cook') {
+            this.props.navigation.navigate('CookDashboard')
+        } else if (job === 'barman') {
+            this.props.navigation.navigate('BarmanDashboard')
+        } else {
+            this.props.navigation.navigate('MenuList')
+        }
     }
 
     render() {
         return(
-            <View style={styles.content}>
-                <Text
-                    style={styles.title}
-                >
-                    The good Fork
-                </Text>
-                <View style={styles.inputView}>
-                    <TextInput 
-                        style={styles.input}
-                        placeholder = "Email*"
+            <View style={styles.container}>
+                <NavBar></NavBar>
+                <View style={styles.content}>
+                    <Text
+                        style={styles.title}
+                    >
+                        The good Fork
+                    </Text>
+                    <View style={styles.inputView}>
+                        <TextInput 
+                            style={styles.input}
+                            name="email"
+                            placeholder = "Email*"
+                            onChangeText = { (value) => this.email = value }
+                            />
+                    </View>
+                    <View style={styles.inputView}>
+                        <TextInput 
+                            style={styles.input}
+                            name="password"
+                            placeholder = "Mot de passe*"
+                            onChangeText = { (value) => this.password = value }
+                            />
+                    </View>
+                    <Button 
+                        title='Se connecter'
+                        onPress = {this._handleSubmit}
                     />
+                    <Button
+                        title="S'enregistrer"
+                        onPress = {() => this.props.navigation.navigate('Register')}
+                    ></Button>
                 </View>
-                <View style={styles.inputView}>
-                    <TextInput 
-                        style={styles.input}
-                        placeholder = "Mot de passe*"
-                    />
-                </View>
-                <Button 
-                    title='Se connecter'
-                    onPress = {() => this._loginUser()}
-                />
             </View>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -57,7 +116,7 @@ const styles = StyleSheet.create({
     content: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1
+        marginTop: '50%'
     },
     inputView:{
         borderBottomWidth: 1,
@@ -66,6 +125,9 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 10
+    },
+    container: {
+        flex: 1,
     }
 })
 

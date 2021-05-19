@@ -1,13 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './Components/Auth/Login';
-import Register from './Components/Auth/Register';
-import WaiterDashboard from './Components/Waiters/WaiterDashboard';
-import CommandListComponent from './Components/Waiters/CommandListComponent';
+import AppNavigator from './Navigation';
+import { Appbar } from 'react-native-paper';
+
 
 export default function App() {
   return (
-      <WaiterDashboard/>
+      <AppNavigator/>
   );
 }
