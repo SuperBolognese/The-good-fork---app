@@ -10,6 +10,7 @@ import CookDashboard from './Components/Cooks/CookDashboard';
 import WaiterDashboard from './Components/Waiters/WaiterDashboard';
 
 import Payment from './Components/Client/Payment';
+import ListePlats from './Components/Client/ListePlats';
 import MenuList from './Components/Client/MenuList';
 
 const stackNavigatorOptions = {
@@ -17,6 +18,7 @@ const stackNavigatorOptions = {
 }
 
 const AppNavigator = createStackNavigator({
+    ListePlats: { screen: ListePlats },
     Login: { screen: Login },
     Register: {screen: Register },
     BarmanDashboard: {screen: BarmanDashboard},

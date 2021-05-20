@@ -4,10 +4,6 @@ import Config from '../../config.json';
 
 class MenuListComponent extends Component {
 
-    caca() {
-        
-    }
-
     render() {
         return (
             <TouchableOpacity
@@ -19,7 +15,11 @@ class MenuListComponent extends Component {
                         style={styles.image}
                     />
                     <View style={styles.content_container}>
-                            <Text style={styles.command_taker}>{this.props.menuItem}</Text>
+                        <Text style={styles.dish_name}>{this.props.dish_name}</Text>
+                        <View>
+                            <Text>Notes des utilisateurs : </Text>
+                            <Text>4/5</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -50,17 +50,6 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
         flexDirection: 'column'
-    },
-    text_container:{
-        flexDirection: 'column',
-    },
-    command_taker: {
-        fontWeight: 'bold',
-        fontSize: 26
-    },
-    destination_text: {
-        fontSize: 20,
-        color: 'green'
     }
 });
 

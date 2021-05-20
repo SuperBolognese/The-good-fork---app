@@ -1,65 +1,56 @@
-import { useLinkProps } from '@react-navigation/native';
-import React, {Component} from 'react';
-import Config from '../../config.json';
-
-import { FlatList, StyleSheet } from 'react-native';
+import React, { Component, useState } from 'react';
 import MenuListComponent from './MenuListComponent';
-import Plats from './Plats';
+import { FlatList, StyleSheet } from 'react-native';
+import config from '../../config.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class MenuList extends Component {
-    constructor(props){
-        super(props)
+
+    constructor() {
+        super();
         this.state = {
-            data: [
-                {
-                    dish: "Entrées",
-                    id:"1"
-                },
-                {
-                    dish: "Plats",
-                    id: "2"
-                },
-                {
-                    dish: "Desserts",
-                    id: "3"
-                },
-                {
-                    dish: "Boissons",
-                    id: "4"
-                }
-            ]
-        };
+            data: [],
+        }
     }
 
-    // componentDidMount() {
-    //     fetch(Config.baseURL + '/api/Menus', {
-    //         method: "GET"
-    //     })
-    //     .then(res => res.json())
-    //     .then(res => {
-    //         this.setState({
-    //             data: res
-    //         });
-    //     })
-    //     .catch((error) => console.error(error));
-    // }
+    componentDidMount() {
+        this.apiCallForMenus().done();
+    }
+
+    checkDishType(res, main_category) {
+        res.forEach(element => {
+            if(element.category === main_category) {
+                this.state.data.push(element);
+                console.log(this.state.data);
+            }
+        });
+    }
+
+    async apiCallForMenus () {
+        const value = await AsyncStorage.getItem('token');
+        fetch(config.baseURL + "/api/Menus", {
+            method: "GET",
+            headers:{
+                'Authorization' : 'Bearer '+ value
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.checkDishType(res, 'entree');
+        })
+        .catch((error) => console.log(error))
+    }
 
     render() {
         return (
             <FlatList 
                 data = {this.state.data}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Plats menuItem={item.dish} />}
+                renderItem={({item}) => <MenuListComponent dish_name={item.dish_name} />}
             />
-        );
+        )
     }
 }
-
-// const styles = StyleSheet.create({
-//     list_container: {
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     }
-// })
 
 export default MenuList;

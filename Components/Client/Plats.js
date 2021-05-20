@@ -3,14 +3,19 @@ import { StyleSheet, View, Text, Image, Button, Touchable, TouchableOpacity } fr
 
 class Plats extends Component {
 
-    caca() {
-        
+    constructor() {
+        super();
+        this.navigateToMenuList = this.navigateToMenuList.bind(this);
+    }
+
+    navigateToMenuList() {
+        this.props.navigation.navigate('MenuList', { dish_category: this.props.menuItem });
     }
 
     render() {
         return (
             <TouchableOpacity
-                onPress={this.caca}
+                onPress={this.navigateToMenuList}
             >
                 <View style={styles.main_container}>
                     <Image

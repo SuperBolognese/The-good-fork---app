@@ -35,7 +35,6 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.setStorageValue('firstName', res.firstName);
             this.setStorageValue('job', res.job);
             this.setStorageValue('token', res.token);
@@ -60,7 +59,7 @@ class Login extends Component {
         } else if (job === 'barman') {
             this.props.navigation.navigate('BarmanDashboard')
         } else {
-            this.props.navigation.navigate('MenuList')
+            this.props.navigation.navigate('ListePlats')
         }
     }
 
