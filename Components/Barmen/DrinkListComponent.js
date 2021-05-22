@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, Button, Touchable, TouchableOpacity } from 'react-native';
 import { getActiveChildNavigationOptions } from 'react-navigation';
 
+//component pour afficher une seule boisson
 class DrinkListComponent extends Component {
 
     callFun(){
@@ -12,7 +13,7 @@ class DrinkListComponent extends Component {
         return (
             <View style={styles.main_container}>
                 <Image
-                    source={{uri : "image"}}
+                    source={require('../../images_static/bonk_drone.png')}
                     style={styles.image}
                 />
                 <View style={styles.content_container}>

@@ -3,6 +3,7 @@ import Config from '../../config.json';
 import { FlatList, StyleSheet, View } from 'react-native';
 import DrinkListComponent from './DrinkListComponent';
 
+//component pour le dashboard des barman affichant une liste du sub-component
 class BarmanDashboard extends Component {
     constructor(props){
         super(props)

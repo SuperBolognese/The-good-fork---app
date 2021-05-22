@@ -1,56 +1,68 @@
 import React, { Component, useState } from 'react';
 import MenuListComponent from './MenuListComponent';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Plats from './Plats';
 
 class MenuList extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: [],
         }
     }
 
     componentDidMount() {
-        this.apiCallForMenus().done();
+        this.apiCallForMenus();
     }
 
-    checkDishType(res, main_category) {
+    checkDishType(res) {
+        const main_category = this.props.navigation.state.params.dish_category;
+        let dish_data = []
         res.forEach(element => {
-            if(element.category === main_category) {
-                this.state.data.push(element);
-                console.log(this.state.data);
+            const category = element.categorie + 's';
+            if(category === main_category) {
+                dish_data.push(element);
             }
         });
+        this.setState({
+            data: dish_data
+        })
+        console.log(this.state.data);
     }
 
-    async apiCallForMenus () {
-        const value = await AsyncStorage.getItem('token');
+    apiCallForMenus () {
         fetch(config.baseURL + "/api/Menus", {
             method: "GET",
-            headers:{
-                'Authorization' : 'Bearer '+ value
-            }
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            this.checkDishType(res, 'entree');
+            this.checkDishType(res);
         })
         .catch((error) => console.log(error))
     }
 
     render() {
         return (
-            <FlatList 
-                data = {this.state.data}
-                keyExtractor={(item) => item.id}
-                renderItem={({item}) => <MenuListComponent dish_name={item.dish_name} />}
-            />
+            <View>
+                <FlatList
+                    style = {styles.flatlist}
+                    data = {this.state.data}
+                    keyExtractor={(item) => item.carte_ID.toString()}
+                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} />}
+                />
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    flatlist: {
+        marginTop: 50,
+        marginBottom: 15
+    }
+})
 
 export default MenuList;

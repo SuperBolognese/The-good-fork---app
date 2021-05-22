@@ -34,8 +34,7 @@ class Register extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            this.props.navigation.navigate('Login');
+            this.props.navigation.navigate('Login');//si c'est fait correctement, l'utilisateur est redirigé vers la page de login
         })
         .catch((error) => console.error(error))
     }

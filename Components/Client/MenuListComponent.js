@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, Button, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import Config from '../../config.json';
 
 class MenuListComponent extends Component {
 
+    constructor(props){
+        super(props);
+    }
+
     render() {
         return (
-            <TouchableOpacity
-                onPress={this.caca}
-            >
+            <View>
                 <View style={styles.main_container}>
                     <Image
-                        source={{uri : "image"}}
+                        source={require('../../images_static/bonk_drone.png')}
                         style={styles.image}
                     />
                     <View style={styles.content_container}>
-                        <Text style={styles.dish_name}>{this.props.dish_name}</Text>
-                        <View>
-                            <Text>Notes des utilisateurs : </Text>
-                            <Text>4/5</Text>
-                        </View>
+                        <Text style={styles.command_taker}>{this.props.dish_name}</Text>
+                        <Text>{this.props.prix} €</Text>
                     </View>
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
 }
@@ -30,7 +29,7 @@ class MenuListComponent extends Component {
 const styles = StyleSheet.create({
     main_container: {
         flexDirection: 'row',
-        height: 180,
+        height: 130,
         width: '95%',
         marginBottom: 10,
         margin: 10,
@@ -39,18 +38,23 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '20%',
-        height: '75%',
-        margin: 5,
+        alignSelf: 'center',
+        width: 100,
+        height: 100,
+        margin: 20,
+        marginLeft: 15,
         backgroundColor: 'grey'
     },
     content_container: {
         flex: 1,
         margin: 5,
-        flexDirection: 'column'
-    }
+        flexDirection: 'column',
+    },
+    command_taker: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginRight: 20
+    },
 });
 
 export default MenuListComponent;

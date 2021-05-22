@@ -5,6 +5,7 @@ import Config from '../../config.json';
 import { FlatList, StyleSheet } from 'react-native';
 import DishListComponent from './DishListComponent';
 
+//component dashboard des cooks qui affiche une liste avec toutes les commandes, par ordre d'arrivée 
 class CookDashboard extends Component {
     constructor(props){
         super(props)
