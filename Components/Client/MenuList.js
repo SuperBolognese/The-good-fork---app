@@ -1,9 +1,8 @@
 import React, { Component, useState } from 'react';
 import MenuListComponent from './MenuListComponent';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Plats from './Plats';
 
 class MenuList extends Component {
 
@@ -30,7 +29,6 @@ class MenuList extends Component {
         this.setState({
             data: dish_data
         })
-        console.log(this.state.data);
     }
 
     apiCallForMenus () {
@@ -51,7 +49,7 @@ class MenuList extends Component {
                     style = {styles.flatlist}
                     data = {this.state.data}
                     keyExtractor={(item) => item.carte_ID.toString()}
-                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} />}
+                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID}/>}
                 />
             </View>
         )
@@ -61,7 +59,23 @@ class MenuList extends Component {
 const styles = StyleSheet.create({
     flatlist: {
         marginTop: 50,
-        marginBottom: 15
+    },
+    touchable: {
+        justifyContent: 'flex-end',
+        flex: 1
+    },
+    login_button: {
+        marginBottom: 40,
+        backgroundColor: "black",
+        width: '80%',
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
     }
 })
 

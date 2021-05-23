@@ -6,11 +6,23 @@ class MenuListComponent extends Component {
 
     constructor(props){
         super(props);
+        this.goToDetails = this.goToDetails.bind(this);
+    }
+
+    goToDetails() {
+        this.props.navigation.navigate('DetailsPlat', {
+            dish_name: this.props.dish_name,
+            description: this.props.description,
+            prix: this.props.prix,
+            id: this.props.id
+        })
     }
 
     render() {
         return (
-            <View>
+            <TouchableOpacity
+                onPress = { this.goToDetails }
+            >
                 <View style={styles.main_container}>
                     <Image
                         source={require('../../images_static/bonk_drone.png')}
@@ -21,7 +33,7 @@ class MenuListComponent extends Component {
                         <Text>{this.props.prix} €</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

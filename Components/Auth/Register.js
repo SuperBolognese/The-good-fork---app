@@ -73,6 +73,7 @@ class Register extends Component {
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
+                            secureTextEntry = {true}
                             onChangeText = { (value) => this.password = value }
                             placeholder = "Mot de passe*"
                         />
@@ -80,6 +81,7 @@ class Register extends Component {
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
+                            secureTextEntry = {true}
                             placeholder = "Répéter le mot de passe*"
                         />
                     </View>

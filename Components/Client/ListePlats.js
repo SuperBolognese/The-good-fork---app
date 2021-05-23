@@ -5,7 +5,7 @@ import Plats from './Plats';
 
 class ListePlats extends Component {
     constructor(){
-        super()
+        super();
         this.state = {
             liste_plats: [
                 {
@@ -37,15 +37,6 @@ class ListePlats extends Component {
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => <Plats menuItem={item.dish} navigation={this.props.navigation} />}
                 />
-                <TouchableOpacity
-                    onPress = {() => this.props.navigation.navigate('Login') }
-                >
-                    <View style={styles.login_button}>
-                        <Text style={styles.button_text}>
-                            Se connecter pour commander
-                        </Text>
-                    </View>
-                </TouchableOpacity>
             </View>
         );
     }
