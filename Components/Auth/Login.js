@@ -15,7 +15,7 @@ class Login extends Component {
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
-    _handleSubmit(event) {
+    _handleSubmit(event) { //stocker les infos des TextInput lors du submit
         const userData = {
             email: this.email,
             password: this.password
@@ -25,7 +25,7 @@ class Login extends Component {
     }
 
     _loginUser(userdata){
-        fetch(Config.baseURL + "/api/Users/Login", {
+        fetch(Config.baseURL + "/api/Users/Login", { //route de connexixon utilisateur
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -35,7 +35,6 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.setStorageValue('firstName', res.firstName);
             this.setStorageValue('job', res.job);
             this.setStorageValue('token', res.token);
@@ -44,7 +43,7 @@ class Login extends Component {
         .catch((error) => console.error(error))
     }
 
-    setStorageValue = async (key, value) => {
+    setStorageValue = async (key, value) => {//mettre les infos du user dans le localstorage
         try {
             await AsyncStorage.setItem(key, value)
         } catch(e) {
@@ -52,7 +51,7 @@ class Login extends Component {
         }
     }
 
-    checkUserJob(job) {
+    checkUserJob(job) {//redirection en fonction du type d'utilisateur
         if (job === "waiter") {
             this.props.navigation.navigate('WaiterDashboard')
         } else if (job === 'cook') {
@@ -60,14 +59,13 @@ class Login extends Component {
         } else if (job === 'barman') {
             this.props.navigation.navigate('BarmanDashboard')
         } else {
-            this.props.navigation.navigate('MenuList')
+            this.props.navigation.navigate('ListePlats')
         }
     }
 
     render() {
         return(
             <View style={styles.container}>
-                <NavBar></NavBar>
                 <View style={styles.content}>
                     <Text
                         style={styles.title}
@@ -86,6 +84,7 @@ class Login extends Component {
                         <TextInput 
                             style={styles.input}
                             name="password"
+                            secureTextEntry = {true}
                             placeholder = "Mot de passe*"
                             onChangeText = { (value) => this.password = value }
                             />

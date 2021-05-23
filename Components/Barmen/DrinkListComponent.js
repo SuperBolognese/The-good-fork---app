@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, Button, Touchable, TouchableOpacity } from 'react-native';
+import { getActiveChildNavigationOptions } from 'react-navigation';
 
+//component pour afficher une seule boisson
 class DrinkListComponent extends Component {
 
-    caca() {
-        
+    callFun(){
+        alert('Nice cock bro');
     }
 
     render() {
         return (
-            <TouchableOpacity
-                onPress={this.caca}
-            >
-                <View style={styles.main_container}>
-                    <Image
-                        source={{uri : "image"}}
-                        style={styles.image}
-                    />
-                    <View style={styles.content_container}>
-                        <View style={styles.text_container}>
-                            <Text style={styles.command_taker}>{this.props.drink}</Text>
-                            <Text style={styles.destination_text}>{this.props.destination}</Text>
-                        </View>
-                        <Button 
-                            title='Valider'
-                        />
-                    </View>
+            <View style={styles.main_container}>
+                <Image
+                    source={require('../../images_static/bonk_drone.png')}
+                    style={styles.image}
+                />
+                <View style={styles.content_container}>
+                    <Text style={styles.command_taker}>{this.props.drink}</Text>
+                    <TouchableOpacity onPress={this.callFun}>
+                        <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                    </TouchableOpacity>
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
 }
@@ -35,7 +30,7 @@ class DrinkListComponent extends Component {
 const styles = StyleSheet.create({
     main_container: {
         flexDirection: 'row',
-        height: 180,
+        height: 130,
         width: '95%',
         marginBottom: 10,
         margin: 10,
@@ -44,29 +39,24 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '20%',
-        height: '75%',
-        margin: 5,
+        alignSelf: 'center',
+        width: 100,
+        height: 100,
+        margin: 20,
+        marginLeft: 15,
         backgroundColor: 'grey'
     },
     content_container: {
         flex: 1,
         margin: 5,
-        flexDirection: 'column'
-    },
-    text_container:{
-        flexDirection: 'column',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     command_taker: {
         fontWeight: 'bold',
-        fontSize: 26
-    },
-    destination_text: {
         fontSize: 20,
-        color: 'green'
-    }
+        marginRight: 20
+    },
 });
 
 export default DrinkListComponent;

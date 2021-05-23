@@ -5,13 +5,14 @@ import Config from '../../config.json';
 import { FlatList, StyleSheet } from 'react-native';
 import DishListComponent from './DishListComponent';
 
+//component dashboard des cooks qui affiche une liste avec toutes les commandes, par ordre d'arrivée 
 class CookDashboard extends Component {
     constructor(props){
         super(props)
         this.state = {
             donnees: [
                 {
-                    name: "Hamburger",
+                    name: "Gateau au chocolat",
                     destination: "A emporter",
                     id: '1'
                 },
@@ -27,6 +28,7 @@ class CookDashboard extends Component {
     render() {
         return (
             <FlatList 
+                style = {styles.list_container}
                 data = {this.state.donnees}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => <DishListComponent dishName={item.name} destination={item.destination} />}
@@ -35,11 +37,10 @@ class CookDashboard extends Component {
     }
 }
 
-// const styles = StyleSheet.create({
-//     list_container: {
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     }
-// })
+const styles = StyleSheet.create({
+    list_container: {
+        marginTop: 60
+    }
+})
 
 export default CookDashboard;

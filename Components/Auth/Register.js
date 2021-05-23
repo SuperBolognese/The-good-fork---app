@@ -34,8 +34,7 @@ class Register extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            this.props.navigation.navigate('Login');
+            this.props.navigation.navigate('Login');//si c'est fait correctement, l'utilisateur est redirigé vers la page de login
         })
         .catch((error) => console.error(error))
     }
@@ -74,6 +73,7 @@ class Register extends Component {
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
+                            secureTextEntry = {true}
                             onChangeText = { (value) => this.password = value }
                             placeholder = "Mot de passe*"
                         />
@@ -81,6 +81,7 @@ class Register extends Component {
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
+                            secureTextEntry = {true}
                             placeholder = "Répéter le mot de passe*"
                         />
                     </View>

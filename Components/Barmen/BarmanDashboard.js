@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import Config from '../../config.json';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import DrinkListComponent from './DrinkListComponent';
 
+//component pour le dashboard des barman affichant une liste du sub-component
 class BarmanDashboard extends Component {
     constructor(props){
         super(props)
         this.state = {
-            donnees: [
+            data: [
                 {
                     name: "Hamburger",
                     destination: "A emporter",
@@ -24,22 +25,20 @@ class BarmanDashboard extends Component {
 
     render() {
         return (
-            <View>
-                <FlatList 
-                    data = {this.state.donnees}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({item}) => <DrinkListComponent drink={item.name} destination={item.destination} />}
-                />
-            </View>
+            <FlatList 
+                style = {styles.list_container}
+                data = {this.state.data}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => <DrinkListComponent drink={item.name} destination={item.destination} />}
+            />
         );
     }
 }
 
-// const styles = StyleSheet.create({
-//     list_container: {
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//     }
-// })
+const styles = StyleSheet.create({
+    list_container: {
+        marginTop: 60
+    }
+})
 
 export default BarmanDashboard;
