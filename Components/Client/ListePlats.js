@@ -1,6 +1,6 @@
 import React, {cloneElement, Component} from 'react';
 
-import { FlatList, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
 import Plats from './Plats';
 
 class ListePlats extends Component {
@@ -30,7 +30,8 @@ class ListePlats extends Component {
 
     render() {
         return (
-            <View>
+            <View style = {styles.main_container}>
+                <Text style = {styles.title}>Nos plats</Text>
                 <FlatList 
                     style={ styles.liste_plats }
                     data = {this.state.liste_plats}
@@ -44,20 +45,12 @@ class ListePlats extends Component {
 
 const styles = StyleSheet.create({
     liste_plats: {
-        marginTop: 50
+        marginTop: 20,
     },
-    login_button: {
-        backgroundColor: "black",
-        width: '80%',
-        height: 50,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 20
-    },
-    button_text: {
-        color: "white",
-        fontSize: 15
+    title: {
+        marginLeft: 10,
+        marginTop: 45,
+        fontSize: 50
     }
 })
 

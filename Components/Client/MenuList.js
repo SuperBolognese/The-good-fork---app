@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import MenuListComponent from './MenuListComponent';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import config from '../../config.json';
