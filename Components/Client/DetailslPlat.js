@@ -13,6 +13,17 @@ class DetailsPlat extends Component {
     }
 
     componentDidMount() {
+        this.getCommandFromStorage().done();
+    }
+
+    async getCommandFromStorage(){
+        const commandAlready = await AsyncStorage.getItem('commande');
+        console.log(commandAlready);
+        // if(commandAlready != null) {
+        //     //this.commande = JSON.parse(commandAlready);
+        // } else {
+        //     this.commande = []
+        // }
     }
 
     async isUserConnected() {
@@ -35,7 +46,12 @@ class DetailsPlat extends Component {
                 quantity: this.quantity
             }
             this.commande.push(element);
+            this.addCommandToStorage(this.commande);
         }
+    }
+
+    async addCommandToStorage(array) {
+        AsyncStorage.setItem('commande', JSON.stringify(array));
     }
 
     render() {

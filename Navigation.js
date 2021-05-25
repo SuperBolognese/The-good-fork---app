@@ -13,12 +13,14 @@ import Payment from './Components/Client/Payment';
 import ListePlats from './Components/Client/ListePlats';
 import MenuList from './Components/Client/MenuList';
 import DetailsPlat from './Components/Client/DetailslPlat';
+import LandingPage from './Components/Client/LandingPage';
 
 const stackNavigatorOptions = {
     headerShown: false
 }
 
 const AppNavigator = createStackNavigator({
+    LandingPage : { screen: LandingPage },
     ListePlats: { screen: ListePlats },
     Login: { screen: Login },
     Register: {screen: Register },
