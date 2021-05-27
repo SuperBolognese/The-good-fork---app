@@ -8,6 +8,7 @@ class DetailsPlat extends Component {
         super(props); 
         this.commande = [];
         this.quantity = 0;
+        this.isExist = false;
 
         this.addToBasket = this.addToBasket.bind(this);
     }
@@ -19,16 +20,15 @@ class DetailsPlat extends Component {
     async getCommandFromStorage(){
         const commandAlready = await AsyncStorage.getItem('commande');
         console.log(commandAlready);
-        // if(commandAlready != null) {
-        //     //this.commande = JSON.parse(commandAlready);
-        // } else {
-        //     this.commande = []
-        // }
+        if(commandAlready != null) {
+            this.commande = JSON.parse(commandAlready);
+        } else {
+            this.commande = []
+        }
     }
 
     async isUserConnected() {
         const token = await AsyncStorage.getItem('token');
-        console.log(token);
         if(token != null) {
            return true;
         } else {
@@ -37,15 +37,26 @@ class DetailsPlat extends Component {
     }
 
     addToBasket() {
-        if(!this.isUserConnected) {
+        if(!this.isUserConnected().done()) {
             this.props.navigation.navigate('Login');
         } else {
-            const element = {
-                id_plat: this.props.navigation.state.params.id,
-                name_plat: this.props.navigation.state.params.dish_name,
-                quantity: this.quantity
+            this.commande.forEach(element => {
+                if(element.id_plat === this.props.navigation.state.params.id) {
+                    element.quantity += 1;
+                    this.isExist = true;
+                } else {
+                    this.isExist = false;
+                }
+            })
+            if(!this.isExist) {
+                const element = {
+                    id_plat: this.props.navigation.state.params.id,
+                    name_plat: this.props.navigation.state.params.dish_name,
+                    prix: this.props.navigation.state.params.prix,
+                    quantity: this.quantity + 1,
+                }
+                this.commande.push(element);
             }
-            this.commande.push(element);
             this.addCommandToStorage(this.commande);
         }
     }
@@ -73,6 +84,9 @@ class DetailsPlat extends Component {
                         style = { styles.description }
                     >
                         {this.props.navigation.state.params.description}
+                    </Text>
+                    <Text>
+                        { this.props.navigation.state.params.prix}
                     </Text>
                     <TextInput 
                         placeholder = "Quantité"

@@ -1,6 +1,6 @@
 import React, {cloneElement, Component} from 'react';
 
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Plats from './Plats';
 
 class ListePlats extends Component {
@@ -28,6 +28,10 @@ class ListePlats extends Component {
         };
     }
 
+    redirectToCommande() {
+        console.log('CACA');
+    }
+
     render() {
         return (
             <View style = {styles.main_container}>
@@ -38,6 +42,15 @@ class ListePlats extends Component {
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => <Plats menuItem={item.dish} navigation={this.props.navigation} />}
                 />
+                <TouchableOpacity
+                    onPress= {() => this.props.navigation.navigate('Commande')} 
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Voir ma commande
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -51,6 +64,18 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginTop: 45,
         fontSize: 50
+    },
+    login_button: {
+        backgroundColor: "black",
+        width: 250,
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
     }
 })
 

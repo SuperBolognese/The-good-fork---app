@@ -51,6 +51,15 @@ class MenuList extends Component {
                     keyExtractor={(item) => item.carte_ID.toString()}
                     renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID}/>}
                 />
+                <TouchableOpacity
+                    onPress= {() => this.emptyStorage().done() }
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Voir ma commande
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -65,7 +74,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     login_button: {
-        marginBottom: 40,
+        position: 'absolute',
+        bottom: 60,
         backgroundColor: "black",
         width: '80%',
         height: 50,

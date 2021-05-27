@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
@@ -5,6 +6,10 @@ class LandingPage extends Component {
 
     constructor() {
         super();
+    }
+
+    async emptyStorage() {
+        await AsyncStorage.removeItem('commande');
     }
 
     render() {
@@ -25,6 +30,15 @@ class LandingPage extends Component {
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             A emporter
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress= {() => this.emptyStorage().done() }
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Vider la commande
                         </Text>
                     </View>
                 </TouchableOpacity>
