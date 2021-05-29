@@ -16,7 +16,7 @@ class LandingPage extends Component {
         return (
             <View style = {styles.main_container}>
                 <TouchableOpacity
-                    onPress= {() => this.props.navigation.navigate('BookTable')}
+                    onPress= {() => this.props.navigation.navigate('Reservation')}
                >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>

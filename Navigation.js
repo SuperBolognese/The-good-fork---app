@@ -14,7 +14,8 @@ import ListePlats from './Components/Client/ListePlats';
 import MenuList from './Components/Client/MenuList';
 import DetailsPlat from './Components/Client/DetailslPlat';
 import LandingPage from './Components/Client/LandingPage';
-import Commande from './Components/Client/Commande'
+import Commande from './Components/Client/Commande';
+import Reservation from './Components/Client/Reservation';
 
 const stackNavigatorOptions = {
     headerShown: false
@@ -31,7 +32,8 @@ const AppNavigator = createStackNavigator({
     Payment: { screen: Payment },
     MenuList: { screen: MenuList },
     DetailsPlat: { screen: DetailsPlat },
-    Commande : { screen: Commande }
+    Commande : { screen: Commande },
+    Reservation : { screen: Reservation }
 },
 {
     defaultNavigationOptions: stackNavigatorOptions

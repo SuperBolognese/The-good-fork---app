@@ -49,7 +49,7 @@ class MenuList extends Component {
                     style = {styles.flatlist}
                     data = {this.state.data}
                     keyExtractor={(item) => item.carte_ID.toString()}
-                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID}/>}
+                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID} imageUrl = {item.imageData}/>}
                 />
                 <TouchableOpacity
                     onPress= {() => this.emptyStorage().done() }

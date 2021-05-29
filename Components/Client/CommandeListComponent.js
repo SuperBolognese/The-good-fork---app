@@ -14,7 +14,7 @@ class CommandeListComponent extends Component {
         return(
             <View style={styles.main_container}>
                 <Image
-                    source={require('../../images_static/bonk_drone.png')}
+                    source={{uri: `data:image/jpeg;base64,${this.props.imageUrl}`}}
                     style={styles.image}
                 />
                 <View style={styles.content_container}>
@@ -23,7 +23,7 @@ class CommandeListComponent extends Component {
                     <Text>x {this.props.quantity}</Text>
                 </View>
                 <TouchableOpacity onPress={this.callFun}>
-                    <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                    <Image source = {require('../../images_static/delete_icon.png')} style={styles.validate_order} />
                 </TouchableOpacity>
             </View>
         )

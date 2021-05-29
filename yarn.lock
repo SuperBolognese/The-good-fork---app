@@ -1011,6 +1011,11 @@
     "exec-sh" "^0.3.2"
     "minimist" "^1.2.0"
 
+"@dietime/react-native-date-picker@^1.1.2":
+  "integrity" "sha512-fON8rNI+0+0UE53uHHAwKMs/viD2iEbdgYLYjEAnfzBnWj0swA+2TDldU0f9qxCsvStEtyo7g8O8puTALhJXEg=="
+  "resolved" "https://registry.npmjs.org/@dietime/react-native-date-picker/-/react-native-date-picker-1.1.2.tgz"
+  "version" "1.1.2"
+
 "@egjs/hammerjs@^2.0.17":
   "integrity" "sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A=="
   "resolved" "https://registry.npmjs.org/@egjs/hammerjs/-/hammerjs-2.0.17.tgz"
@@ -3050,6 +3055,11 @@
   "integrity" "sha512-CCuEOQUNLYtMA0rt0sQ9u5LlIMH7lDJG7dImoorfKMsP95yHXy8dl3oCdtaz2zbsPgggVYeom9gE+gQu+Ki4rQ=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-9.1.2.tgz"
   "version" "9.1.2"
+
+"expo-linear-gradient@^8.4.0":
+  "integrity" "sha512-f9JOXaIl0MR8RBYRIud5UAsEi52oz81XhQs73VUpujemHjOyHmrZa6dqwf399YOwI/WBwbpcINcUIw/mCYE1mA=="
+  "resolved" "https://registry.npmjs.org/expo-linear-gradient/-/expo-linear-gradient-8.4.0.tgz"
+  "version" "8.4.0"
 
 "expo-status-bar@~1.0.4":
   "integrity" "sha512-s7nc496D/Zn1NGiMJ5wu6HyIdXxbgGtmZZtbHm7rpbcmLdf28GmMSNHDx7M0t00BMhky7VAurTCUo+BJs8ugsw=="

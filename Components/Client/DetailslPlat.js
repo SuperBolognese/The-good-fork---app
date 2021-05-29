@@ -19,7 +19,6 @@ class DetailsPlat extends Component {
 
     async getCommandFromStorage(){
         const commandAlready = await AsyncStorage.getItem('commande');
-        console.log(commandAlready);
         if(commandAlready != null) {
             this.commande = JSON.parse(commandAlready);
         } else {
@@ -29,6 +28,7 @@ class DetailsPlat extends Component {
 
     async isUserConnected() {
         const token = await AsyncStorage.getItem('token');
+        console.log(token);
         if(token != null) {
            return true;
         } else {
@@ -37,7 +37,7 @@ class DetailsPlat extends Component {
     }
 
     addToBasket() {
-        if(!this.isUserConnected().done()) {
+        if(this.isUserConnected().done()) {
             this.props.navigation.navigate('Login');
         } else {
             this.commande.forEach(element => {
@@ -54,6 +54,7 @@ class DetailsPlat extends Component {
                     name_plat: this.props.navigation.state.params.dish_name,
                     prix: this.props.navigation.state.params.prix,
                     quantity: this.quantity + 1,
+                    imageUrl: this.props.navigation.state.params.imageUrl
                 }
                 this.commande.push(element);
             }
@@ -71,7 +72,7 @@ class DetailsPlat extends Component {
             <View>
                 <View style = {styles.image_container }>
                     <Image
-                        source={require('../../images_static/bonk_drone.png')}
+                        source={{uri: `data:image/jpeg;base64,${this.props.navigation.state.params.imageUrl}`}}
                         style={styles.image}
                     />
                 </View>

@@ -14,7 +14,8 @@ class MenuListComponent extends Component {
             dish_name: this.props.dish_name,
             description: this.props.description,
             prix: this.props.prix,
-            id: this.props.id
+            id: this.props.id,
+            imageUrl: this.props.imageUrl
         })
     }
 
@@ -25,7 +26,7 @@ class MenuListComponent extends Component {
             >
                 <View style={styles.main_container}>
                     <Image
-                        source={require('../../images_static/bonk_drone.png')}
+                        source={{uri: `data:image/jpeg;base64,${this.props.imageUrl}`}}
                         style={styles.image}
                     />
                     <View style={styles.content_container}>

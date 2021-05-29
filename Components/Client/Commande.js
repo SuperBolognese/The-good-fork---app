@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import CommandeListComponent from './CommandeListComponent';
 
 class Commande extends Component {
@@ -28,8 +28,12 @@ class Commande extends Component {
             fullTotal += element.quantity * element.prix;
         })
         this.setState({
-            total: fullTotal
+            total: parseFloat(fullTotal.toFixed(2))
         });
+    }
+
+    sendCommande() {
+        
     }
 
     render() {
@@ -40,9 +44,19 @@ class Commande extends Component {
                     style = {styles.flatlist}
                     data = {this.state.commande}
                     keyExtractor={(item) => item.id_plat.toString()}
-                    renderItem={({item}) => <CommandeListComponent dish_name={item.name_plat} quantity = {item.quantity} prix = {item.prix} navigation={this.props.navigation} />}
+                    renderItem={({item}) => <CommandeListComponent dish_name={item.name_plat} quantity = {item.quantity} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} />}
                 />
                 <Text>Total : {this.state.total} €</Text>
+                <TouchableOpacity
+                    onPress= {this.addToBasket}
+                    style = {styles.touchable}
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Ajouter au panier
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -52,6 +66,19 @@ const styles = StyleSheet.create({
     flatlist: {
         marginTop: 50,
     },
+    login_button: {
+        marginBottom: 40,
+        backgroundColor: "black",
+        width: 250,
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
+    }
 })
 
 export default Commande;
