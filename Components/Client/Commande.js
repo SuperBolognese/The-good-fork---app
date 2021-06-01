@@ -10,8 +10,10 @@ class Commande extends Component {
             commande: [],
             total: 0
         }
+        this.fullBody = []
 
         this.getCommandFromStorage = this.getCommandFromStorage.bind(this);
+        this.prepareBodyForCommand = this.prepareBodyForCommand.bind(this);
     }
 
     componentDidMount() {
@@ -32,8 +34,21 @@ class Commande extends Component {
         });
     }
 
-    sendCommande() {
-        
+    prepareBodyForCommand() {
+        const commandData = {
+            idCustomer: 1,
+            idTable: 0,
+            nbPerson: 0,
+            state: 0
+        }
+
+
+        let commande = [];
+        commande = JSON.stringify({
+            commande: commandData,
+            listCommande: this.state.commande
+        })
+        console.log(commande);
     }
 
     render() {
@@ -48,7 +63,7 @@ class Commande extends Component {
                 />
                 <Text>Total : {this.state.total} €</Text>
                 <TouchableOpacity
-                    onPress= {this.addToBasket}
+                    onPress= {this.prepareBodyForCommand}
                     style = {styles.touchable}
                 >
                     <View style={styles.login_button}>

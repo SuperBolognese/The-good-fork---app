@@ -10,6 +10,7 @@
   "dependencies": {
     "@dietime/react-native-date-picker": "^1.1.2",
     "@react-native-async-storage/async-storage": "^1.15.4",
+    "@react-native-picker/picker": "^1.16.1",
     "@react-navigation/native": "^5.9.4",
     "expo": "~41.0.1",
     "expo-status-bar": "~1.0.4",
