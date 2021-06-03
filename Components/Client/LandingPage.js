@@ -9,7 +9,9 @@ class LandingPage extends Component {
     }
 
     async emptyStorage() {
-        await AsyncStorage.removeItem('commande');
+        AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => alert('success'));
     }
 
     render() {
@@ -39,6 +41,15 @@ class LandingPage extends Component {
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             Vider la commande
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress= {() => this.props.navigation.navigate('Login')}
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Page Login
                         </Text>
                     </View>
                 </TouchableOpacity>

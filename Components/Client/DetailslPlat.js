@@ -7,7 +7,7 @@ class DetailsPlat extends Component {
     constructor(props) {
         super(props); 
         this.commande = [];
-        this.quantity = 0;
+        this.qty = 0;
         this.isExist = false;
 
         this.addToBasket = this.addToBasket.bind(this);
@@ -42,7 +42,7 @@ class DetailsPlat extends Component {
         } else {
             this.commande.forEach(element => {
                 if(element.id_plat === this.props.navigation.state.params.id) {
-                    element.quantity += 1;
+                    element.qty += 1;
                     this.isExist = true;
                 } else {
                     this.isExist = false;
@@ -53,7 +53,7 @@ class DetailsPlat extends Component {
                     id_plat: this.props.navigation.state.params.id,
                     name_plat: this.props.navigation.state.params.dish_name,
                     prix: this.props.navigation.state.params.prix,
-                    quantity: this.quantity + 1,
+                    qty: this.qty + 1,
                     imageUrl: this.props.navigation.state.params.imageUrl
                 }
                 this.commande.push(element);
@@ -92,7 +92,7 @@ class DetailsPlat extends Component {
                     <TextInput 
                         placeholder = "Quantité"
                         keyboardType = "numeric"
-                        onChangeText = { (value) => this.quantity = value }
+                        onChangeText = { (value) => this.qty = value }
                     />
 
                 </View>

@@ -20,7 +20,7 @@ class CommandeListComponent extends Component {
                 <View style={styles.content_container}>
                     <Text style={styles.command_taker}>{this.props.dish_name}</Text>
                     <Text>{this.props.prix} €</Text>
-                    <Text>x {this.props.quantity}</Text>
+                    <Text>x {this.props.qty}</Text>
                 </View>
                 <TouchableOpacity onPress={this.callFun}>
                     <Image source = {require('../../images_static/delete_icon.png')} style={styles.validate_order} />
