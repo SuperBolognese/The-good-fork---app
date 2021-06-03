@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TouchableOpacity } from 'react-native';
+import Config from '../../config.json';
 
 class CommandListComponent extends Component {
+    constructor() {
+        super();
+    }
+
     render() {
         return (
-            <View style={styles.main_container}>
+            <TouchableOpacity
+                    style = { styles.main_container }
+            >
                 <Image
                     source={{uri : "image"}}
                     style={styles.image}
@@ -18,7 +25,7 @@ class CommandListComponent extends Component {
                         title='Valider'
                     />
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

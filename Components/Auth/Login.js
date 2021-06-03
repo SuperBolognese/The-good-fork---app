@@ -36,8 +36,10 @@ class Login extends Component {
         .then(res => res.json())
         .then(res => {
             this.setStorageValue('firstName', res.firstName);
+            this.setStorageValue('lastName', res.lastName);
             this.setStorageValue('job', res.job);
             this.setStorageValue('token', res.token);
+            this.setStorageValue('userId', res.clientID.toString())
             this.checkUserJob(res.job);
         })
         .catch((error) => console.error(error))
@@ -59,7 +61,7 @@ class Login extends Component {
         } else if (job === 'barman') {
             this.props.navigation.navigate('BarmanDashboard')
         } else {
-            this.props.navigation.navigate('ListePlats')
+            this.props.navigation.navigate('LandingPage')
         }
     }
 

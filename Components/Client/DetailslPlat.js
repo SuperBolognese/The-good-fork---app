@@ -7,12 +7,23 @@ class DetailsPlat extends Component {
     constructor(props) {
         super(props); 
         this.commande = [];
-        this.quantity = 0;
+        this.qty = 0;
+        this.isExist = false;
 
         this.addToBasket = this.addToBasket.bind(this);
     }
 
     componentDidMount() {
+        this.getCommandFromStorage().done();
+    }
+
+    async getCommandFromStorage(){
+        const commandAlready = await AsyncStorage.getItem('commande');
+        if(commandAlready != null) {
+            this.commande = JSON.parse(commandAlready);
+        } else {
+            this.commande = []
+        }
     }
 
     async isUserConnected() {
@@ -26,16 +37,33 @@ class DetailsPlat extends Component {
     }
 
     addToBasket() {
-        if(!this.isUserConnected) {
+        if(this.isUserConnected().done()) {
             this.props.navigation.navigate('Login');
         } else {
-            const element = {
-                id_plat: this.props.navigation.state.params.id,
-                name_plat: this.props.navigation.state.params.dish_name,
-                quantity: this.quantity
+            this.commande.forEach(element => {
+                if(element.id_plat === this.props.navigation.state.params.id) {
+                    element.qty += 1;
+                    this.isExist = true;
+                } else {
+                    this.isExist = false;
+                }
+            })
+            if(!this.isExist) {
+                const element = {
+                    id_plat: this.props.navigation.state.params.id,
+                    name_plat: this.props.navigation.state.params.dish_name,
+                    prix: this.props.navigation.state.params.prix,
+                    qty: this.qty + 1,
+                    imageUrl: this.props.navigation.state.params.imageUrl
+                }
+                this.commande.push(element);
             }
-            this.commande.push(element);
+            this.addCommandToStorage(this.commande);
         }
+    }
+
+    async addCommandToStorage(array) {
+        AsyncStorage.setItem('commande', JSON.stringify(array));
     }
 
     render() {
@@ -44,7 +72,7 @@ class DetailsPlat extends Component {
             <View>
                 <View style = {styles.image_container }>
                     <Image
-                        source={require('../../images_static/bonk_drone.png')}
+                        source={{uri: `data:image/jpeg;base64,${this.props.navigation.state.params.imageUrl}`}}
                         style={styles.image}
                     />
                 </View>
@@ -58,10 +86,13 @@ class DetailsPlat extends Component {
                     >
                         {this.props.navigation.state.params.description}
                     </Text>
+                    <Text>
+                        { this.props.navigation.state.params.prix}
+                    </Text>
                     <TextInput 
                         placeholder = "Quantité"
                         keyboardType = "numeric"
-                        onChangeText = { (value) => this.quantity = value }
+                        onChangeText = { (value) => this.qty = value }
                     />
 
                 </View>

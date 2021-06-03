@@ -9,19 +9,32 @@ class WaiterDashboard extends Component {
     constructor(props){
         super(props)
         this.state = {
-            donnees: [
-                {
-                    name: "Mr Perineau",
-                    destination: "A emporter",
-                    id: '1'
-                },
-                {
-                    name: "Mr Bourguignat",
-                    destination: "Sur place",
-                    id: '2'
-                }
-            ]
+            data: []
         };
+
+        this.updateState = this.updateState.bind(this);
+    }
+
+    componentDidMount() {
+        this.getCommandesFromAPI();
+    }
+
+    getCommandesFromAPI() {
+        console.log('CACA');
+        fetch(Config.baseURL + '/api/Commandes',{
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            //this.updateState(res);
+        })
+    }
+
+    updateState(res) {
+        this.setState({
+            data: res
+        });
     }
 
     render() {
@@ -30,7 +43,7 @@ class WaiterDashboard extends Component {
                 style={styles.list_container}
                 data = {this.state.donnees}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <CommandListComponent name={item.name} destination={item.destination} />}
+                renderItem={({item}) => <CommandListComponent name={item.name} destination={item.destination} navigation={this.props.navigation} />}
             />
         );
     }

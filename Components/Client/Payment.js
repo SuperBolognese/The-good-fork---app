@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Config from '../../config.json';
-import { StyleSheet, View, Text, Image, TextInput, Button} from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 
 class Payment extends Component {
     constructor () {
@@ -12,13 +12,17 @@ class Payment extends Component {
         }
     }
 
+    validateOrder() {
+
+    }
+
     render() {
         return (
             <View style={styles.content}>
                 <Text
                     style={styles.title}
                 >
-                    Payment informations
+                    Informations de paiement
                 </Text>
                 <View style={styles.inputView}>
                     <Text>Credit card number</Text>
@@ -43,9 +47,15 @@ class Payment extends Component {
                         placeholder = "123"
                     />
                 </View>
-                <Button 
-                    title='Valider'
-                />
+                <TouchableOpacity
+                    onPress= {() => this.props.navigation.navigate('Payment') }
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Passer au paiement
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -70,9 +80,18 @@ const styles = StyleSheet.create({
         width: '80%',
         margin: 10
     },
-    button: {
-        marginTop: 10
-    }
+    login_button: {
+        backgroundColor: "black",
+        width: '80%',
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
+    },
 })
 
 export default Payment;

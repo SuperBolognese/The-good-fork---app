@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import MenuListComponent from './MenuListComponent';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import config from '../../config.json';
@@ -49,8 +49,17 @@ class MenuList extends Component {
                     style = {styles.flatlist}
                     data = {this.state.data}
                     keyExtractor={(item) => item.carte_ID.toString()}
-                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID}/>}
+                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID} imageUrl = {item.imageData}/>}
                 />
+                <TouchableOpacity
+                    onPress= {() => this.emptyStorage().done() }
+                >
+                    <View style={styles.login_button}>
+                        <Text style={styles.button_text}>
+                            Voir ma commande
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -65,7 +74,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     login_button: {
-        marginBottom: 40,
+        position: 'absolute',
+        bottom: 60,
         backgroundColor: "black",
         width: '80%',
         height: 50,
