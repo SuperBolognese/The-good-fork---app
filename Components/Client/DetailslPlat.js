@@ -113,15 +113,15 @@ class DetailsPlat extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        marginTop: 15,
+        marginTop: 20,
     },
     dish_title: {
         alignSelf: 'center',
-        fontSize: 30
+        fontSize: 30,
     },
     image_container:{
         width: '100%',
-        height: '50%',
+        height: '40%',
     },
     image: {
         flex: 1,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     description: {
         width: '95%',
         alignSelf: 'center',
-        marginTop: 20
+        marginTop: 70,
     },
     login_button: {
         marginBottom: 40,
@@ -142,10 +142,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        bottom: 0,
+        borderRadius: 7,
     },
     button_text: {
         color: "white",
-        fontSize: 15
+        fontSize: 15,
+        fontWeight: 'bold',
     },
     touchable: {
         justifyContent: 'flex-end',

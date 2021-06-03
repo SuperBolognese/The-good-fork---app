@@ -75,13 +75,14 @@ const styles = StyleSheet.create({
     },
     login_button: {
         position: 'absolute',
-        bottom: 60,
+        bottom:-495,
         backgroundColor: "black",
-        width: '80%',
+        width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 7,
     },
     button_text: {
         color: "white",

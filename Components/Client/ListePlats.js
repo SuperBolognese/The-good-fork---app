@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        position:'absolute',
+        bottom: -80,
+        borderRadius: 7,
     },
     button_text: {
         color: "white",

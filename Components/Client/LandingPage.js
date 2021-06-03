@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 
 class LandingPage extends Component {
 
@@ -17,6 +17,7 @@ class LandingPage extends Component {
     render() {
         return (
             <View style = {styles.main_container}>
+                <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                 <TouchableOpacity
                     onPress= {() => this.props.navigation.navigate('Reservation')}
                >
@@ -72,11 +73,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 7,
     },
     button_text: {
         color: "white",
-        fontSize: 15
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    logo: {
+        alignItems: 'center',
+        marginBottom: 150,
+
     }
+
 })
 
 export default LandingPage;
