@@ -10,11 +10,24 @@ class MenuList extends Component {
         super(props);
         this.state = {
             data: [],
+            token: ""
         }
+
+        this.getToken = this.getToken.bind(this);
     }
 
     componentDidMount() {
+        this.getToken().done();
         this.apiCallForMenus();
+    }
+
+    async getToken() {
+        const token = AsyncStorage.getItem('token');
+        console.log('TEST');
+        console.log(token);
+        this.setState({
+            token: token
+        });
     }
 
     checkDishType(res) {
@@ -34,6 +47,9 @@ class MenuList extends Component {
     apiCallForMenus () {
         fetch(config.baseURL + "/api/Menus", {
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + this.state.token
+            }
         })
         .then(res => res.json())
         .then(res => {

@@ -28,10 +28,6 @@ class ListePlats extends Component {
         };
     }
 
-    redirectToCommande() {
-        console.log('CACA');
-    }
-
     render() {
         return (
             <View style = {styles.main_container}>
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position:'absolute',
-        bottom: -80,
         borderRadius: 7,
     },
     button_text: {

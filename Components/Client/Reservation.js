@@ -10,6 +10,7 @@ class Reservation extends Component {
     constructor() {
         super();
         this.state = {
+            token: '',
             date: "",
             lastName: "",
             services: [],
@@ -22,19 +23,26 @@ class Reservation extends Component {
 
     async getElementsFromStorage() {
         const lastName = await AsyncStorage.getItem('lastName');
+        const token = await AsyncStorage.getItem('token');
         this.setState({
-            lastName: lastName
+            lastName: lastName,
+            token: token
         })
     }
 
     componentDidMount() {
-        this.getServiceHours();
         this.getElementsFromStorage().done();
+        this.getServiceHours();
+        const data = new Date().parse();
+        console.log(data);
     }
 
     getServiceHours() {
         fetch(Config.baseURL + "/api/Services", {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + this.state.token
+            }
         })
         .then(res => res.json())
         .then(res => {

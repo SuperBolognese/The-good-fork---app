@@ -4,12 +4,12 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import CommandeListComponent from './CommandeListComponent';
 import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json'
-import { createPortal } from 'react-dom';
 
 class Commande extends Component {
     constructor() {
         super();
         this.state = {
+            token: "",
             commande: [],
             total: 0,
             services: [],
@@ -22,6 +22,8 @@ class Commande extends Component {
         this.getCommandFromStorage = this.getCommandFromStorage.bind(this);
         this.prepareBodyForCommand = this.prepareBodyForCommand.bind(this);
         this.getServiceHours = this.getServiceHours.bind(this);
+        this.deleteCommandeElement = this.deleteCommandeElement.bind(this);
+        this.calculateTotal = this.calculateTotal.bind(this);
     }
 
     componentDidMount() {
@@ -30,13 +32,7 @@ class Commande extends Component {
         let hours = new Date().getHours();
     }
 
-    async getCommandFromStorage() {
-        const command = await AsyncStorage.getItem('commande');
-        const userId = await AsyncStorage.getItem('userId');
-        this.setState({
-            commande: JSON.parse(command),
-            userId: userId
-        });
+    calculateTotal() {
         let fullTotal = 0;
         this.state.commande.forEach(element => {
             fullTotal += element.qty * element.prix;
@@ -46,9 +42,45 @@ class Commande extends Component {
         });
     }
 
+    async getCommandFromStorage() {
+        const command = await AsyncStorage.getItem('commande');
+        const userId = await AsyncStorage.getItem('userId');
+        const token = await AsyncStorage.getItem('token');
+        this.setState({
+            commande: JSON.parse(command),
+            userId: userId,
+            token: token
+        });
+        if (this.state.commande) {
+            this.calculateTotal();
+        }
+    }
+
+    deleteCommandeElement(id) {
+        let commande = this.state.commande;
+        commande.forEach(element => {
+            if(element.id_plat === id) {
+                let index = commande.indexOf(element);
+                commande.splice(index, 1);
+            }
+        });
+        this.setState({
+            commande: commande
+        });
+        this.calculateTotal();
+        this.changeStorageValue(this.state.commande);
+    }
+
+    async changeStorageValue(commande) {
+        AsyncStorage.setItem('commande', JSON.stringify(commande));
+    }
+
     getServiceHours() {
         fetch(Config.baseURL + "/api/Services", {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + this.state.token
+            }
         })
         .then(res => res.json())
         .then(res => {
@@ -66,7 +98,7 @@ class Commande extends Component {
             }
         });
         this.setState({
-            services: hours
+            services: hours,
         });
     }
 
@@ -81,10 +113,11 @@ class Commande extends Component {
 
         const commandData = {
             IDService: serviceIdTemp, 
+            date: "oui",
             idCustomer: this.state.userId,
             idTable: 0,
             nbPerson: 0,
-            state: 0
+            state: 0  
         }
 
         let listPlats = this.state.commande;
@@ -101,24 +134,10 @@ class Commande extends Component {
         commande = JSON.stringify({
             commande: commandData,
             listCommande: listPlats
-        })
-        this.sendCommande(commande)
-    }
-
-    sendCommande(commande) {
-        fetch(Config.baseURL + "/api/Commandes/NewCommande", {
-            method: "POST",
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: commande
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-        })
-        .catch(error => console.log(error));
+        });
+        this.props.navigation.navigate('Payment', {
+            commande: commande
+        });
     }
 
     render() {
@@ -129,7 +148,7 @@ class Commande extends Component {
                     style = {styles.flatlist}
                     data = {this.state.commande}
                     keyExtractor={(item) => item.id_plat.toString()}
-                    renderItem={({item}) => <CommandeListComponent dish_name={item.name_plat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} />}
+                    renderItem={({item}) => <CommandeListComponent id={item.id_plat} dish_name={item.name_plat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} deleteCommandeElement = {this.deleteCommandeElement} />}
                 />
                 <Text>Total : {this.state.total} €</Text>
                 <Text>

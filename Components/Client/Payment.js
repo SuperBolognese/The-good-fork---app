@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Config from '../../config.json';
 import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
+import Toast from 'react-native-root-toast';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Payment extends Component {
     constructor () {
@@ -8,12 +10,65 @@ class Payment extends Component {
         this.state = {
             creditCardNumber: "",
             creditCardDate: "",
-            creditCardCrypto: ""
+            creditCardCrypto: "",
+            token: ""
         }
+
+        this.onSubmitPayment = this.onSubmitPayment.bind(this);
+        this.isUserConnected = this.isUserConnected.bind(this);
     }
 
-    validateOrder() {
+    componentDidMount() {
+        this.isUserConnected().done();
+        this.isUserConnected();
+    }
 
+    onSubmitPayment() {
+        this.sendCommande(this.props.navigation.state.params.commande);
+    }
+
+    async isUserConnected() {
+        const token = await AsyncStorage.getItem('token');
+        this.setState({
+            token: token
+        });
+    }
+
+    async emptyCommande() {
+        AsyncStorage.removeItem('commande');
+    }
+
+    sendCommande(commande) {
+        console.log(commande);
+        fetch(Config.baseURL + "/api/Commandes/NewCommande", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token
+            },
+            body: commande
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.emptyCommande();
+            Toast.show('Commande envoyée avec succès !', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            Toast.show("La commande n'a pas pu être envoyée :(", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
+        });
     }
 
     render() {
@@ -48,11 +103,11 @@ class Payment extends Component {
                     />
                 </View>
                 <TouchableOpacity
-                    onPress= {() => this.props.navigation.navigate('Payment') }
+                    onPress= {() => this.onSubmitPayment() }
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
-                            Passer au paiement
+                            Valider
                         </Text>
                     </View>
                 </TouchableOpacity>

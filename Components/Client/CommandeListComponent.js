@@ -4,10 +4,12 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 class CommandeListComponent extends Component {
     constructor() {
         super();
+
+        this.deleteElement = this.deleteElement.bind(this);
     }
 
-    callFun(){
-        alert('Nice cock bro');
+    deleteElement() {
+        this.props.deleteCommandeElement(this.props.id);
     }
 
     render() {
@@ -22,7 +24,7 @@ class CommandeListComponent extends Component {
                     <Text>{this.props.prix} €</Text>
                     <Text>x {this.props.qty}</Text>
                 </View>
-                <TouchableOpacity onPress={this.callFun}>
+                <TouchableOpacity onPress={this.deleteElement}>
                     <Image source = {require('../../images_static/delete_icon.png')} style={styles.validate_order} />
                 </TouchableOpacity>
             </View>
