@@ -59,7 +59,9 @@ const styles = StyleSheet.create({
     title: {
         marginLeft: 10,
         marginTop: 45,
-        fontSize: 50
+        fontSize: 40,
+        color: "#5e6472",
+        fontWeight: 'bold',
     },
     login_button: {
         backgroundColor: "black",
@@ -68,13 +70,20 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        position:'absolute',
+        marginBottom: 100,
+        marginTop: 30,
         borderRadius: 7,
+        
     },
     button_text: {
         color: "white",
-        fontSize: 15
-    }
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
+    main_container: {
+        backgroundColor:"#faf3dd",
+
+    },
 })
 
 export default ListePlats;

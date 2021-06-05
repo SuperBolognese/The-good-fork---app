@@ -63,11 +63,12 @@ const styles = StyleSheet.create({
     main_container: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
+        backgroundColor:"#faf3dd",
     },
     login_button: {
         marginBottom: 40,
-        backgroundColor: "black",
+        backgroundColor: "#5e6472",
         width: 250,
         height: 50,
         alignSelf: 'center',

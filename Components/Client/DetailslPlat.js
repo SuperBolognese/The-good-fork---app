@@ -114,6 +114,7 @@ class DetailsPlat extends Component {
 const styles = StyleSheet.create({
     main_container: {
         marginTop: 20,
+        backgroundColor:"#faf3dd",
     },
     dish_title: {
         alignSelf: 'center',
@@ -142,9 +143,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'absolute',
-        bottom: 0,
-        borderRadius: 7,
     },
     button_text: {
         color: "white",

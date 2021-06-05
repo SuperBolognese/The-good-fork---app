@@ -38,26 +38,31 @@ const styles = StyleSheet.create({
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        flex: 1
+        borderWidth: 0.90,
+        borderColor: "#ffa69e",
+        flex: 1,
+        borderRadius: 5,
+        marginBottom: 10
+        
     },
     image: {
         width: 120,
         height: 120,
         margin: 10,
-        backgroundColor: 'grey'
+        backgroundColor: 'grey',
+        borderRadius: 5,
     },
     content_container: {
         flex: 1,
         margin: 5,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     command_taker: {
         fontWeight: 'bold',
         fontSize: 26,
+        color: "#5e6472",
     },
     destination_text: {
         fontSize: 20,

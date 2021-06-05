@@ -60,7 +60,7 @@ class MenuList extends Component {
 
     render() {
         return (
-            <View>
+            <View style = {styles.main_container}>
                 <FlatList
                     style = {styles.flatlist}
                     data = {this.state.data}
@@ -84,15 +84,16 @@ class MenuList extends Component {
 const styles = StyleSheet.create({
     flatlist: {
         marginTop: 50,
+        backgroundColor:"#faf3dd",
     },
     touchable: {
         justifyContent: 'flex-end',
-        flex: 1
+        flex: 1,
     },
     login_button: {
-        position: 'absolute',
-        bottom:-495,
-        backgroundColor: "black",
+        position: "absolute",
+        top: 300,
+        backgroundColor: "#5e6472",
         width: 250,
         height: 50,
         alignSelf: 'center',
@@ -102,8 +103,11 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: "white",
-        fontSize: 15
-    }
+        fontSize: 15,
+    },
+    main_container: {
+        backgroundColor:"#faf3dd",
+    },
 })
 
 export default MenuList;
