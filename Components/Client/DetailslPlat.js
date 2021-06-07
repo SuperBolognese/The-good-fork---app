@@ -51,7 +51,7 @@ class DetailsPlat extends Component {
             if(!this.isExist) {
                 const element = {
                     id_plat: this.props.navigation.state.params.id,
-                    name_plat: this.props.navigation.state.params.dish_name,
+                    NamePlat: this.props.navigation.state.params.dish_name,
                     prix: this.props.navigation.state.params.prix,
                     qty: this.qty + 1,
                     imageUrl: this.props.navigation.state.params.imageUrl
@@ -87,7 +87,7 @@ class DetailsPlat extends Component {
                         {this.props.navigation.state.params.description}
                     </Text>
                     <Text>
-                        { this.props.navigation.state.params.prix}
+                        { this.props.navigation.state.params.prix}€
                     </Text>
                     <TextInput 
                         placeholder = "Quantité"

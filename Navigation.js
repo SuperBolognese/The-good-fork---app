@@ -9,6 +9,9 @@ import CookDashboard from './Components/Cooks/CookDashboard';
 
 import WaiterDashboard from './Components/Waiters/WaiterDashboard';
 import CommandeDetails from './Components/Waiters/CommandeDetails';
+import ListePlatsWaiter from './Components/Waiters/ListePlatsWaiter';
+import CommandsToSend from './Components/Waiters/CommandsToSend';
+import PlatsWaiter from './Components/Waiters/PlatsWaiter';
 
 import Payment from './Components/Client/Payment';
 import ListePlats from './Components/Client/ListePlats';
@@ -36,6 +39,9 @@ const AppNavigator = createStackNavigator({
     Commande : { screen: Commande },
     Reservation : { screen: Reservation },
     CommandeDetails: { screen : CommandeDetails }, 
+    ListePlatsWaiter: { screen: ListePlatsWaiter },
+    CommandsToSend: { screen: CommandsToSend },
+    PlatsWaiter: { screen: PlatsWaiter },
 },
 {
     defaultNavigationOptions: stackNavigatorOptions

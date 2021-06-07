@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Config from '../../config.json';
-import { StyleSheet, View, Text, Image, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import NavBar from '../Shared/Navbar';
 
 class Register extends Component {
@@ -42,7 +42,6 @@ class Register extends Component {
     render() {
         return(
             <View style={styles.content}>
-                <NavBar />
                 <View style={styles.main_container}>
                     <Text
                         style={styles.title}
@@ -85,10 +84,16 @@ class Register extends Component {
                             placeholder = "Répéter le mot de passe*"
                         />
                     </View>
-                    <Button 
-                        title='Créer un compte'
-                        onPress = {() => this._handleSubmit()}
-                    />
+                    <TouchableOpacity
+                        onPress= {this._handleSubmit}
+                        style = {styles.touchable}
+                    >
+                        <View style={styles.login_button}>
+                            <Text style={styles.button_text}>
+                                S'enregistrer
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -113,7 +118,19 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1
-    }
+    },
+    login_button: {
+        backgroundColor: "black",
+        width: 250,
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
+    },
 })
 
 export default Register;

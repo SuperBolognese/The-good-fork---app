@@ -5,26 +5,66 @@ import Config from '../../config.json';
 class CommandListComponent extends Component {
     constructor() {
         super();
+        this.state = {
+            commande: [],
+            destination: "",
+        }
+
+        this.checkDestination = this.checkDestination.bind(this);
+        this.goToDetails = this.goToDetails.bind(this);
+        this.validateOrder = this.validateOrder.bind(this);
+    }
+
+    componentDidMount() {
+        this.checkDestination();
+    }
+
+    checkDestination() {
+        if(this.props.commande.commande.idTable === 0) {
+            this.setState({
+                destination: "A emporter"
+            })
+        } else {
+            this.setState({
+                destination: "Sur place"
+            })
+        }
+    }
+
+    goToDetails() {
+        this.props.navigation.navigate('CommandeDetails', {
+            listePlats: this.props.commande.listCommande,
+        });
+    }
+
+    validateOrder() {
+        fetch(Config.baseURL + '/api/Commandes/StateCommande?id=' + this.props.commande.commande.id, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + this.props.token
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+        })
+        .catch(error => console.log(error))
     }
 
     render() {
         return (
             <TouchableOpacity
-                    style = { styles.main_container }
+                style = { styles.main_container }
+                onPress = { this.goToDetails }
             >
-                <Image
-                    source={{uri : "image"}}
-                    style={styles.image}
-                />
                 <View style={styles.content_container}>
                     <View style={styles.text_container}>
-                        <Text style={styles.command_taker}>{this.props.name}</Text>
-                        <Text style={styles.destination_text}>{this.props.destination}</Text>
+                        <Text style={styles.destination_text}>{this.state.destination}</Text>
                     </View>
-                    <Button 
-                        title='Valider'
-                    />
                 </View>
+                <TouchableOpacity onPress={this.validateOrder }>
+                    <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                </TouchableOpacity>
             </TouchableOpacity>
         )
     }
@@ -33,7 +73,7 @@ class CommandListComponent extends Component {
 const styles = StyleSheet.create({
     main_container: {
         flexDirection: 'row',
-        height: 180,
+        height: 100,
         width: '95%',
         marginBottom: 10,
         margin: 10,
@@ -62,7 +102,7 @@ const styles = StyleSheet.create({
     destination_text: {
         fontSize: 20,
         color: 'green'
-    }
+    },
 });
 
 export default CommandListComponent;

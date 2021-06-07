@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import CommandeListComponent from './CommandeListComponent';
 import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json'
@@ -109,11 +109,17 @@ class Commande extends Component {
             if(element.hourOfService === this.state.selectedService){
                 serviceIdTemp = element.id
             }
-        })
+        });
+
+        const date = new Date();
+        const year = (date.getFullYear());
+        const month = (date.getMonth()+1);
+        const day = (date.getDate());
+        const dateAEnvoyer = day + "-" +month+"-"+year;
 
         const commandData = {
             IDService: serviceIdTemp, 
-            date: "oui",
+            date: dateAEnvoyer,
             idCustomer: this.state.userId,
             idTable: 0,
             nbPerson: 0,
@@ -125,7 +131,6 @@ class Commande extends Component {
         listPlats.forEach(plat => {
             delete plat.imageUrl;
             delete plat.prix;
-            delete plat.name_plat;
             plat.Detail = "oui";
             plat.state = 0;
         });
@@ -135,6 +140,7 @@ class Commande extends Component {
             commande: commandData,
             listCommande: listPlats
         });
+
         this.props.navigation.navigate('Payment', {
             commande: commande
         });
@@ -142,14 +148,11 @@ class Commande extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <Text>CACA</Text>
-                <FlatList
-                    style = {styles.flatlist}
-                    data = {this.state.commande}
-                    keyExtractor={(item) => item.id_plat.toString()}
-                    renderItem={({item}) => <CommandeListComponent id={item.id_plat} dish_name={item.name_plat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} deleteCommandeElement = {this.deleteCommandeElement} />}
-                />
+                { this.state.commande.map((item) => {
+                    return( <CommandeListComponent id={item.id_plat} dish_name={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id} deleteCommandeElement = {this.deleteCommandeElement} />)
+                })}
                 <Text>Total : {this.state.total} €</Text>
                 <Text>
                     Heure à laquelle vous récupérez votre commande :
@@ -171,16 +174,19 @@ class Commande extends Component {
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
-                            Ajouter au panier
+                            Passer au paiement
                         </Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    main_container: {
+        marginBottom: 20
+    },
     flatlist: {
         marginTop: 50,
     },

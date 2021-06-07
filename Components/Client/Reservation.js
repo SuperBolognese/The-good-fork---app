@@ -33,8 +33,6 @@ class Reservation extends Component {
     componentDidMount() {
         this.getElementsFromStorage().done();
         this.getServiceHours();
-        const data = new Date().parse();
-        console.log(data);
     }
 
     getServiceHours() {
@@ -68,17 +66,22 @@ class Reservation extends Component {
                 serviceIdTemp = element.id
             }
         })
-        console.log('CACA');
-        console.log(serviceIdTemp);
 
+        const date = this.state.date;
+        const year = (date.getFullYear());
+        const month = (date.getMonth()+1);
+        const day = (date.getDate());
+        const dateAEnvoyer = day + "-" +month+"-"+year;
+        
         const apiBody = {
             customerName: this.state.lastName,
             numberPersons: this.state.nbPersonnes,
             tableID: 0,
-            serviceID: serviceIdTemp
+            serviceID: serviceIdTemp,
+            data: dateAEnvoyer
         }
 
-        //console.log(apiBody);
+        console.log(apiBody);
     }
 
     render() {

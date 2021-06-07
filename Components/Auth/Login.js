@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Config from '../../config.json';
-import { StyleSheet, View, Text, Image, TextInput, Button} from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavBar from '../Shared/Navbar';
 
@@ -91,14 +91,26 @@ class Login extends Component {
                             onChangeText = { (value) => this.password = value }
                             />
                     </View>
-                    <Button 
-                        title='Se connecter'
-                        onPress = {this._handleSubmit}
-                    />
-                    <Button
-                        title="S'enregistrer"
-                        onPress = {() => this.props.navigation.navigate('Register')}
-                    ></Button>
+                    <TouchableOpacity
+                        onPress= {this._handleSubmit}
+                        style = {styles.touchable}
+                    >
+                        <View style={styles.login_button}>
+                            <Text style={styles.button_text}>
+                                Se connecter
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress= {() => this.props.navigation.navigate('Register')}
+                        style = {styles.touchable}
+                    >
+                        <View style={styles.login_button}>
+                            <Text style={styles.button_text}>
+                                S'enregistrer
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -129,7 +141,19 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-    }
+    },
+    login_button: {
+        backgroundColor: "black",
+        width: 250,
+        height: 50,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15
+    },
 })
 
 export default Login;
