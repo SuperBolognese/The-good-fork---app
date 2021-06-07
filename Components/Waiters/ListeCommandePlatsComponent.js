@@ -10,7 +10,7 @@ class ListeCommandePlatsComponent extends Component {
         return(
             <View style={styles.main_container}>
                 <Text style={styles.command_taker}>{this.props.namePlat}        </Text>
-                <Text styme={styles.qty}>x {this.props.qty}</Text>
+                <Text style={styles.qty}>x {this.props.qty}</Text>
             </View>
         )
     }

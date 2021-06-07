@@ -12,6 +12,8 @@ import CommandeDetails from './Components/Waiters/CommandeDetails';
 import ListePlatsWaiter from './Components/Waiters/ListePlatsWaiter';
 import CommandsToSend from './Components/Waiters/CommandsToSend';
 import PlatsWaiter from './Components/Waiters/PlatsWaiter';
+import CommandeWaiter from './Components/Waiters/CommandeWaiter';
+import SummaryCommande from './Components/Waiters/SummaryCommande';
 
 import Payment from './Components/Client/Payment';
 import ListePlats from './Components/Client/ListePlats';
@@ -42,6 +44,8 @@ const AppNavigator = createStackNavigator({
     ListePlatsWaiter: { screen: ListePlatsWaiter },
     CommandsToSend: { screen: CommandsToSend },
     PlatsWaiter: { screen: PlatsWaiter },
+    CommandeWaiter: { screen: CommandeWaiter },
+    SummaryCommande: { screen: SummaryCommande }
 },
 {
     defaultNavigationOptions: stackNavigatorOptions

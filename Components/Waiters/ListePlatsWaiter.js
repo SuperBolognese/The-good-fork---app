@@ -12,10 +12,15 @@ class ListePlatsWaiter extends Component {
             liste_plats: [],
             token: ""
         };
+        this.commande = [];
 
         this.apiCallForMenus = this.apiCallForMenus.bind(this);
         this.checkDishType = this.checkDishType.bind(this);
+        this.addToBasket = this.addToBasket.bind(this);
+        this.getCommandFromStorage = this.getCommandFromStorage.bind(this);
+        this.addCommandToStorage = this.addCommandToStorage.bind(this);
     }
+
     componentDidMount() {
         this.apiCallForMenus();
     }
@@ -48,16 +53,50 @@ class ListePlatsWaiter extends Component {
         });
     }
 
+    async getCommandFromStorage(){
+        const commandAlready = await AsyncStorage.getItem('commande');
+        if(commandAlready != null) {
+            this.commande = JSON.parse(commandAlready);
+        } else {
+            this.commande = []
+        }
+    }
+
+    addToBasket(id, namePLat, prix, qty, imageUrl) {
+        this.commande.forEach(element => {
+            if(element.id_plat === id) {
+                element.qty += 1;
+                this.isExist = true;
+            } else {
+                this.isExist = false;
+            }
+        })
+        if(!this.isExist) {
+            const element = {
+                id_plat: id,
+                NamePlat: namePLat,
+                prix: prix,
+                qty: qty + 1,
+            }
+            this.commande.push(element);
+        }
+        this.addCommandToStorage(this.commande);
+    }
+
+    async addCommandToStorage(array) {
+        AsyncStorage.setItem('commande', JSON.stringify(array));
+    }
+
     render() {
         return (
             <ScrollView style = {styles.main_container}>
                 <View style={styles.liste_plats}>
                     {this.state.liste_plats.map((item) => {
-                        return(<PlatsWaiter menuItem={item.plat} navigation={this.props.navigation} key={item.carte_ID} imageUrl={item.imageData}/>)
+                        return(<PlatsWaiter prix={item.prix} menuItem={item.plat} id={item.carte_ID} navigation={this.props.navigation} key={item.carte_ID} addToBasket = {this.addToBasket} imageUrl={item.imageData}/>)
                     })}
                 </View>
                 <TouchableOpacity
-                    onPress= {() => this.props.navigation.navigate('Commande')} 
+                    onPress= {() => this.props.navigation.navigate('SummaryCommande')} 
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
