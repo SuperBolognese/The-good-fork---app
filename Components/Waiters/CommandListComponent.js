@@ -12,7 +12,7 @@ class CommandListComponent extends Component {
 
         this.checkDestination = this.checkDestination.bind(this);
         this.goToDetails = this.goToDetails.bind(this);
-        this.validateOrder = this.validateOrder.bind(this);
+        this.validateCommand = this.validateCommand.bind(this);
     }
 
     componentDidMount() {
@@ -37,18 +37,8 @@ class CommandListComponent extends Component {
         });
     }
 
-    validateOrder() {
-        fetch(Config.baseURL + '/api/Commandes/StateCommande?id=' + this.props.commande.commande.id, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + this.props.token
-            }
-        })
-        .then(res => res.json())
-        .then(res => {
-            console.log(res);
-        })
-        .catch(error => console.log(error))
+    validateCommand() {
+        this.props.validateOrder(this.props.commande.commande.id);
     }
 
     render() {
@@ -62,7 +52,7 @@ class CommandListComponent extends Component {
                         <Text style={styles.destination_text}>{this.state.destination}</Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={this.validateOrder }>
+                <TouchableOpacity onPress={ this.validateCommand }>
                     <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
                 </TouchableOpacity>
             </TouchableOpacity>

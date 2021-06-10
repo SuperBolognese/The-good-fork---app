@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CommandListComponent from './CommandListComponent';
 
 class WaiterDashboard extends Component {
@@ -13,6 +13,7 @@ class WaiterDashboard extends Component {
             data: []
         };
 
+        this.token ="";
         this.updateState = this.updateState.bind(this);
     }
 
@@ -22,10 +23,8 @@ class WaiterDashboard extends Component {
 
     async getCommandesFromAPI() {
         const token = await AsyncStorage.getItem('token');
-        this.setState({
-            token: token
-        })
-        fetch(Config.baseURL + '/api/Commandes/getCommandeByState?state=0',{
+        this.token = token;
+        fetch(Config.baseURL + '/api/Commandes/getListCommandeByState?state=0',{
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -44,15 +43,27 @@ class WaiterDashboard extends Component {
         });
     }
 
+    validateOrder(commandId) {
+        fetch(Config.baseURL + '/api/Commandes/StateListCommande?id=' + commandId, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + this.token
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            this.getCommandesFromAPI();
+        })
+        .catch(error => console.log(error))
+    }
+
     render() {
         return (
-            <View>
-                <FlatList 
-                    style={styles.list_container}
-                    data = {this.state.data}
-                    keyExtractor={(item) => item.commande.id.toString()}
-                    renderItem={({item}) => <CommandListComponent idCommande={item.commande.id} token={this.state.token} navigation={this.props.navigation} commande={item} key={item.commande.id}/>}
-                />
+            <ScrollView style={styles.list_container}>
+                {this.state.data.map((item) => {
+                    return ( <CommandListComponent token={this.token} idCommande={item.commande.id} navigation={this.props.navigation} commande={item} key={item.commande.id} validateOrder={this.validateOrder} /> )
+                })}
                 <View style={styles.bottomTabBar}>
                     <TouchableOpacity
                         style={styles.bottomTabButton}
@@ -72,7 +83,7 @@ class WaiterDashboard extends Component {
                         <Text style={styles.button_text}>Récupérer</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

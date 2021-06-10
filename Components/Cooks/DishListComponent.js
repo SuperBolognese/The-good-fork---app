@@ -1,26 +1,47 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, Button, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
 class DishListComponent extends Component {
+    constructor() {
+        super();
 
-    callFun() {
-        alert("Nice cock bro");
+        this.state = {
+            destination: ""
+        }
+
+        this.checkDestination = this.checkDestination.bind(this);
+        this.goToDetails = this.goToDetails.bind(this);
+    }
+
+    goToDetails() {
+        this.props.navigation.navigate('CommandeDetailsCook', {
+            commande: this.props.listCommande
+        });
+    }
+
+    componentDidMount() {
+        this.checkDestination();
+    }
+
+    checkDestination() {
+        if(this.props.commande.idTable === 0) {
+            this.setState({
+                destination: "A emporter"
+            })
+        } else {
+            this.setState({
+                destination: "Sur place"
+            })
+        }
     }
 
     render() {
         return (
-            <View style={styles.main_container}>
-                <Image
-                    source={require('../../images_static/bonk_drone.png')}
-                    style={styles.image}
-                />
+            <TouchableOpacity style={styles.main_container} onPress={this.goToDetails}>
                 <View style={styles.content_container}>
-                    <Text style={styles.command_taker}>{this.props.dishName}</Text>
-                    <TouchableOpacity onPress={this.callFun}>
-                        <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
-                    </TouchableOpacity>
+                    <Text style={styles.command_taker}>{this.state.destination}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

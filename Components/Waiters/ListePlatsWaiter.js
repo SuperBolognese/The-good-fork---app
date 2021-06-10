@@ -62,7 +62,7 @@ class ListePlatsWaiter extends Component {
         }
     }
 
-    addToBasket(id, namePLat, prix, qty, imageUrl) {
+    addToBasket(id, namePLat, prix, qty, typePlat) {
         this.commande.forEach(element => {
             if(element.id_plat === id) {
                 element.qty += 1;
@@ -77,6 +77,7 @@ class ListePlatsWaiter extends Component {
                 NamePlat: namePLat,
                 prix: prix,
                 qty: qty + 1,
+                typePlat: typePlat
             }
             this.commande.push(element);
         }
@@ -92,7 +93,7 @@ class ListePlatsWaiter extends Component {
             <ScrollView style = {styles.main_container}>
                 <View style={styles.liste_plats}>
                     {this.state.liste_plats.map((item) => {
-                        return(<PlatsWaiter prix={item.prix} menuItem={item.plat} id={item.carte_ID} navigation={this.props.navigation} key={item.carte_ID} addToBasket = {this.addToBasket} imageUrl={item.imageData}/>)
+                        return(<PlatsWaiter typePlat={item.categorie} prix={item.prix} menuItem={item.plat} id={item.carte_ID} navigation={this.props.navigation} key={item.carte_ID} addToBasket = {this.addToBasket} imageUrl={item.imageData}/>)
                     })}
                 </View>
                 <TouchableOpacity

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 
 class DetailsPlat extends Component {
 
@@ -54,7 +54,8 @@ class DetailsPlat extends Component {
                     NamePlat: this.props.navigation.state.params.dish_name,
                     prix: this.props.navigation.state.params.prix,
                     qty: this.qty + 1,
-                    imageUrl: this.props.navigation.state.params.imageUrl
+                    imageUrl: this.props.navigation.state.params.imageUrl,
+                    TypePlat: this.props.navigation.state.params.TypePlat
                 }
                 this.commande.push(element);
             }
@@ -69,14 +70,14 @@ class DetailsPlat extends Component {
     render() {
 
         return(
-            <View>
+            <View style={styles.main_container}>
                 <View style = {styles.image_container }>
                     <Image
                         source={{uri: `data:image/jpeg;base64,${this.props.navigation.state.params.imageUrl}`}}
                         style={styles.image}
                     />
                 </View>
-                <View style= { styles.main_container }>
+                <View style= { styles.content }>
                     <Text
                         style = { styles.dish_title }
                     >{this.props.navigation.state.params.dish_name}
@@ -112,7 +113,7 @@ class DetailsPlat extends Component {
 }
 
 const styles = StyleSheet.create({
-    main_container: {
+    content: {
         marginTop: 20,
         backgroundColor:"#faf3dd",
     },
@@ -153,6 +154,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         flex: 1
     },
+    main_container: {
+        backgroundColor:"#faf3dd",
+    }
 
 })
 

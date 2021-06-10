@@ -17,6 +17,7 @@ class SummaryCommande extends Component {
             userId: 0,
             selectedService: ""
         }
+        this.details = "Rien";
         this.numTable = 0;
         this.fullBody = {};
 
@@ -45,7 +46,6 @@ class SummaryCommande extends Component {
         const command = await AsyncStorage.getItem('commande');
         const userId = await AsyncStorage.getItem('userId');
         const token = await AsyncStorage.getItem('token');
-        console.log(command);
         this.setState({
             commande: JSON.parse(command),
             userId: userId,
@@ -125,7 +125,8 @@ class SummaryCommande extends Component {
             idCustomer: this.state.userId,
             idTable: this.numTable,
             nbPerson: 0,
-            state: 0  
+            state: 0,
+            Detail: this.details
         }
 
         let listPlats = this.state.commande;
@@ -142,7 +143,6 @@ class SummaryCommande extends Component {
             commande: commandData,
             listCommande: listPlats
         });
-
         this.sendCommande(commande);
     }
 
@@ -187,9 +187,8 @@ class SummaryCommande extends Component {
     render() {
         return( 
             <ScrollView>
-                <Text>CACA</Text>
                 { this.state.commande.map((item) => {
-                    return( <ListeCommandePlatsComponent id={item.id_plat} namePlat={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
+                    return( <ListeCommandePlatsComponent typePlat={item.categorie} id={item.id_plat} namePlat={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
                 })}
                 <Text>Total : {this.state.total} €</Text>
                 <TextInput 
@@ -198,6 +197,12 @@ class SummaryCommande extends Component {
                     keyboardType = "numeric"
                     placeholder = "Numéro de table"
                     onChangeText = { (value) => this.numTable = value }
+                />
+                <TextInput 
+                    style={styles.input}
+                    name="numTable"
+                    placeholder = "Des détails ?"
+                    onChangeText = { (value) => this.details = value }
                 />
                 <Text>
                     Sélectionner le service : 

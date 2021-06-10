@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-class ListeCommandePlatsComponent extends Component {
+class CommandeListComponent extends Component {
     constructor() {
         super();
+
+        this.updateOrder = this.updateOrder.bind(this);
+    }
+
+    updateOrder() {
+        this.props.validateOrder(this.props.id);
     }
 
     render() {
@@ -13,6 +19,9 @@ class ListeCommandePlatsComponent extends Component {
                     <Text style={styles.command_taker}>{this.props.namePlat}</Text>
                 </View>
                 <Text style={styles.qty}>x {this.props.qty}</Text>
+                <TouchableOpacity onPress={this.updateOrder}>
+                    <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                </TouchableOpacity>
             </View>
         )
     }
@@ -43,4 +52,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ListeCommandePlatsComponent; 
+export default CommandeListComponent

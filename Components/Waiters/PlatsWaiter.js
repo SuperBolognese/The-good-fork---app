@@ -21,7 +21,7 @@ class PlatsWaiter extends Component {
                 <View style={styles.content_container}>
                     <Text style={styles.command_taker}>{this.props.menuItem}</Text>
                     <TouchableOpacity
-                        onPress= { () => this.props.addToBasket(this.props.id, this.props.menuItem, this.props.prix, 0, this.props.imageUrl) }
+                        onPress= { () => this.props.addToBasket(this.props.id, this.props.menuItem, this.props.prix, 0, this.props.typePlat) }
                         style = {styles.touchable}
                     >
                         <View style={styles.login_button}>

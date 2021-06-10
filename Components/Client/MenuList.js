@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MenuListComponent from './MenuListComponent';
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -58,14 +58,13 @@ class MenuList extends Component {
 
     render() {
         return (
-            <View style = {styles.main_container}>
-                <FlatList
-                    style = {styles.flatlist}
-                    data = {this.state.data}
-                    keyExtractor={(item) => item.carte_ID.toString()}
-                    renderItem={({item}) => <MenuListComponent dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID} imageUrl = {item.imageData}/>}
-                />
-            </View>
+            <ScrollView style = {styles.main_container}>
+                <View style = {styles.content_container}>
+                    {this.state.data.map((item) => {
+                        return( <MenuListComponent categorie= {item.categorie} dish_name={item.plat} description={item.description} prix={item.prix} navigation={this.props.navigation} id={item.carte_ID} key={item.carte_ID} imageUrl = {item.imageData}/> )
+                    })}
+                </View>
+            </ScrollView>
         )
     }
 }
@@ -97,6 +96,9 @@ const styles = StyleSheet.create({
     main_container: {
         backgroundColor:"#faf3dd",
     },
+    content_container: {
+        marginTop: 50
+    }
 })
 
 export default MenuList;

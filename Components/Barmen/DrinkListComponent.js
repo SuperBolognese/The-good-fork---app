@@ -5,24 +5,46 @@ import { getActiveChildNavigationOptions } from 'react-navigation';
 //component pour afficher une seule boisson
 class DrinkListComponent extends Component {
 
-    callFun(){
-        alert('Nice cock bro');
+    constructor() {
+        super();
+        this.state = {
+            commande: [],
+            destination: "",
+        }
+
+        this.checkDestination = this.checkDestination.bind(this);
+        this.goToDetails = this.goToDetails.bind(this);
+    }
+
+    componentDidMount() {
+        this.checkDestination();
+    }
+
+    checkDestination() {
+        if(this.props.commande.idTable === 0) {
+            this.setState({
+                destination: "A emporter"
+            })
+        } else {
+            this.setState({
+                destination: "Sur place"
+            })
+        }
+    }
+
+    goToDetails() {
+        this.props.navigation.navigate('CommandeDetailsBarman', {
+            commande: this.props.listCommande
+        });
     }
 
     render() {
         return (
-            <View style={styles.main_container}>
-                <Image
-                    source={require('../../images_static/bonk_drone.png')}
-                    style={styles.image}
-                />
+            <TouchableOpacity style={styles.main_container} onPress={this.goToDetails}>
                 <View style={styles.content_container}>
-                    <Text style={styles.command_taker}>{this.props.drink}</Text>
-                    <TouchableOpacity onPress={this.callFun}>
-                        <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
-                    </TouchableOpacity>
+                    <Text style={styles.command_taker}>{this.state.destination}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -30,7 +52,7 @@ class DrinkListComponent extends Component {
 const styles = StyleSheet.create({
     main_container: {
         flexDirection: 'row',
-        height: 130,
+        height: 100,
         width: '95%',
         marginBottom: 10,
         margin: 10,
@@ -38,25 +60,15 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         flex: 1
     },
-    image: {
-        alignSelf: 'center',
-        width: 100,
-        height: 100,
-        margin: 20,
-        marginLeft: 15,
-        backgroundColor: 'grey'
-    },
     content_container: {
         flex: 1,
         margin: 5,
-        flexDirection: 'row',
-        alignItems: 'center'
+        flexDirection: 'column'
     },
     command_taker: {
         fontWeight: 'bold',
-        fontSize: 20,
-        marginRight: 20
-    },
+        fontSize: 26
+    }
 });
 
 export default DrinkListComponent;

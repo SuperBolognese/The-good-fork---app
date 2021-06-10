@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import CommandeListComponent from './CommandeListComponent';
 import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json'
@@ -16,7 +16,7 @@ class Commande extends Component {
             userId: 0,
             selectedService: ""
         }
-
+        this.details = "Rien";
         this.fullBody = {};
 
         this.getCommandFromStorage = this.getCommandFromStorage.bind(this);
@@ -123,7 +123,8 @@ class Commande extends Component {
             idCustomer: this.state.userId,
             idTable: 0,
             nbPerson: 0,
-            state: 0  
+            state: 0,
+            Detail: this.details
         }
 
         let listPlats = this.state.commande;
@@ -149,10 +150,11 @@ class Commande extends Component {
     render() {
         return (
             <ScrollView>
-                <Text>CACA</Text>
-                { this.state.commande.map((item) => {
-                    return( <CommandeListComponent id={item.id_plat} dish_name={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id} deleteCommandeElement = {this.deleteCommandeElement} />)
-                })}
+                <View style={styles.flatlist}>
+                    { this.state.commande.map((item) => {
+                        return( <CommandeListComponent id={item.id_plat} dish_name={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
+                    })}
+                </View>
                 <Text>Total : {this.state.total} €</Text>
                 <Text>
                     Heure à laquelle vous récupérez votre commande :
@@ -168,6 +170,13 @@ class Commande extends Component {
                         })} 
                     </Picker>
                 </View>
+                <Text>Des détails à nous donner ? :</Text>
+                <TextInput 
+                    style={styles.input}
+                    name="details"
+                    placeholder = "Des détails ?"
+                    onChangeText = { (value) => this.details = value }
+                />
                 <TouchableOpacity
                     onPress= {this.prepareBodyForCommand}
                     style = {styles.touchable}

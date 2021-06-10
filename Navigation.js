@@ -6,13 +6,14 @@ import Register from './Components/Auth/Register';
 
 import BarmanDashboard from './Components/Barmen/BarmanDashboard';
 import CookDashboard from './Components/Cooks/CookDashboard';
+import CommandeDetailsCook from './Components/Cooks/CommandeDetailsCook';
+import CommandeDetailsBarman from './Components/Barmen/CommandeDetailsBarman';
 
 import WaiterDashboard from './Components/Waiters/WaiterDashboard';
 import CommandeDetails from './Components/Waiters/CommandeDetails';
 import ListePlatsWaiter from './Components/Waiters/ListePlatsWaiter';
 import CommandsToSend from './Components/Waiters/CommandsToSend';
 import PlatsWaiter from './Components/Waiters/PlatsWaiter';
-import CommandeWaiter from './Components/Waiters/CommandeWaiter';
 import SummaryCommande from './Components/Waiters/SummaryCommande';
 
 import Payment from './Components/Client/Payment';
@@ -44,8 +45,9 @@ const AppNavigator = createStackNavigator({
     ListePlatsWaiter: { screen: ListePlatsWaiter },
     CommandsToSend: { screen: CommandsToSend },
     PlatsWaiter: { screen: PlatsWaiter },
-    CommandeWaiter: { screen: CommandeWaiter },
-    SummaryCommande: { screen: SummaryCommande }
+    SummaryCommande: { screen: SummaryCommande },
+    CommandeDetailsCook: { screen: CommandeDetailsCook },
+    CommandeDetailsBarman: { screen: CommandeDetailsBarman }
 },
 {
     defaultNavigationOptions: stackNavigatorOptions

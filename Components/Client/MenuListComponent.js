@@ -15,7 +15,8 @@ class MenuListComponent extends Component {
             description: this.props.description,
             prix: this.props.prix,
             id: this.props.id,
-            imageUrl: this.props.imageUrl
+            imageUrl: this.props.imageUrl,
+            TypePlat: this.props.categorie
         })
     }
 

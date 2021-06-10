@@ -1,6 +1,6 @@
 import React, {cloneElement, Component} from 'react';
 
-import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Plats from './Plats';
 
 class ListePlats extends Component {
@@ -30,14 +30,11 @@ class ListePlats extends Component {
 
     render() {
         return (
-            <View style = {styles.main_container}>
+            <ScrollView style = {styles.main_container}>
                 <Text style = {styles.title}>Nos plats</Text>
-                <FlatList 
-                    style={ styles.liste_plats }
-                    data = {this.state.liste_plats}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({item}) => <Plats menuItem={item.dish} navigation={this.props.navigation} />}
-                />
+                {this.state.liste_plats.map((item) => {
+                    return (<Plats menuItem={item.dish} navigation={this.props.navigation} key={item.id}/>)
+                })}
                 <TouchableOpacity
                     onPress= {() => this.props.navigation.navigate('Commande')} 
                 >
@@ -47,7 +44,7 @@ class ListePlats extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         );
     }
 }
