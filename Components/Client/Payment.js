@@ -74,6 +74,7 @@ class Payment extends Component {
     render() {
         return (
             <View style={styles.content}>
+                 <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                 <Text
                     style={styles.title}
                 >
@@ -121,14 +122,20 @@ const styles = StyleSheet.create({
         width: '80%',
         margin: 10
     },
+    logo: {
+        position: 'absolute',
+        top: 80,
+    },
     title: {
         marginBottom: 50,
-        fontSize: 30
+        fontSize: 30,
+        color: '#5e6472',
     },
     content: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
+        backgroundColor: '#faf3dd',
     },
     inputView:{
         borderBottomWidth: 1,
@@ -136,12 +143,15 @@ const styles = StyleSheet.create({
         margin: 10
     },
     login_button: {
-        backgroundColor: "black",
+        backgroundColor: "#5e6472",
         width: '80%',
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        top: 150,
+        borderRadius: 7,
     },
     button_text: {
         color: "white",

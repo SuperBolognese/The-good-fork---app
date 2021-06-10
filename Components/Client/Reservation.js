@@ -86,31 +86,38 @@ class Reservation extends Component {
 
     render() {
         return( 
-            <View>
+            <View style={styles.container}>
                 <Text
                     style = {styles.title}
                 > Réserver une table </Text>
-                <DatePicker
-                    startYear = {2021}
-                    height= {100}
-                    value={this.state.date}
-                    onChange={(value) => this.setState({date : value})}
+                <Text style={styles.textDate}>Selectionnez une date à laquelle vous souhaitez réserver : </Text>
+                <View style={styles.datePick}>
+                    <DatePicker
+                        startYear = {2021}
+                        height= {100}
+                        value={this.state.date}
+                        onChange={(value) => this.setState({date : value})}
                 />
-                <Text>Selectionner à quelle heure vous souhaitez venir : </Text>
-                <Picker
-                    selectedValue={this.state.selectedService}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
-                >
-                    {this.state.services.map((item, index) => {
-                        return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
-                    })} 
-                </Picker>
-
-                <View>
-                    <Text>Nombre de personnes : </Text>
-                    <Text>{this.state.nbPersonnes}</Text>
                 </View>
+
+                <View style={styles.pickheure}>
+                    <Picker 
+                        selectedValue={this.state.selectedService}
+                        style={{ height: 50, width: 150 }}
+                        onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
+                    >
+                        {this.state.services.map((item, index) => {
+                            return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
+                        })} 
+                    </Picker>
+                </View>
+
+                <View style={styles.textNb}>
+                    <Text style={styles.text1}>Nombre de personnes : </Text>
+                    <Text style={styles.text2}>{this.state.nbPersonnes}</Text>
+                </View>
+
+
 
                 <TouchableOpacity
                     onPress= {() => this.prepareBodyForAPI() }
@@ -128,26 +135,62 @@ class Reservation extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#faf3dd',
+        height: '100%',
+    },
     title: {
-        marginTop: 30,
-        fontSize: 30,
+        marginLeft: 10,
+        marginTop: 45,
+        fontSize: 40,
+        color: "#5e6472",
         fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    datePick: {
+        backgroundColor: '#faf3dd',
+        marginTop: 25,
+    },
+    textDate: {
+        marginBottom: 20,
+        marginLeft: 10,
+        marginTop: 35,
+        fontSize: 17,
+    },
+    textNb: {
+        top: 200,
+    },
+    text1: {
+        fontSize: 17,
+        marginLeft: 10,
+    },
+    text2: {
+        fontSize: 17,
+        fontWeight: 'bold',
+        bottom: 20,
+        left: 200 
     },
     touchable: {
         marginTop: 400,
     },  
+    pickheure: {
+        alignSelf: 'center',
+        bottom: 30,
+    },
     login_button: {
-        backgroundColor: "black",
+        backgroundColor: '#5e6472',
         width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        bottom: 60,
+        borderRadius: 7,
     },
     button_text: {
         color: "white",
         fontSize: 15
-    }
+    },
 })
 
 export default Reservation;

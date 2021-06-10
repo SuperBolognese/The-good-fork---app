@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     login_button: {
-        position: "absolute",
         top: 300,
         backgroundColor: "#5e6472",
         width: 250,

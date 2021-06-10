@@ -138,12 +138,15 @@ const styles = StyleSheet.create({
     },
     login_button: {
         marginBottom: 40,
-        backgroundColor: "black",
+        backgroundColor: "#5e6472",
         width: '80%',
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 7,
+        position: 'absolute',
+        bottom: -350,
     },
     button_text: {
         color: "white",
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
     },
     touchable: {
         justifyContent: 'flex-end',
-        flex: 1
+        flex: 1,
     },
     main_container: {
         backgroundColor:"#faf3dd",

@@ -194,18 +194,35 @@ class Commande extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        marginBottom: 20
+        marginBottom: 20,
     },
     flatlist: {
         marginTop: 50,
     },
+    title: {
+        marginLeft: 10,
+        marginTop: 45,
+        fontSize: 40,
+        color: "#5e6472",
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    textTotal: {
+        marginTop: 20,
+        fontSize: 17,
+        marginLeft: 10,
+        fontWeight: "bold",
+    },
     login_button: {
-        backgroundColor: "black",
+        backgroundColor: '#5e6472',
         width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 7,
+        position: 'absolute',
+        top: 190,
     },
     button_text: {
         color: "white",
@@ -213,8 +230,16 @@ const styles = StyleSheet.create({
     },
     hourPicker: {
         alignItems: 'center',
-        margin: 10
-    }
+        margin: 10,
+    },
+    hourText: {
+        top: 30,
+        fontSize: 17,
+        marginLeft: 10,
+    },
+    scroll: {
+        backgroundColor: '#faf3dd',
+    },
 })
 
 export default Commande;

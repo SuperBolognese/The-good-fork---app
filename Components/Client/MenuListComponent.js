@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        flex: 1
+        borderWidth: 0.90,
+        borderColor: "#ffa69e",
+        borderRadius: 5,
+        flex: 1,
+        backgroundColor: '#faf3dd'
     },
     image: {
         alignSelf: 'center',
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
         height: 100,
         margin: 20,
         marginLeft: 15,
-        backgroundColor: 'grey'
+        backgroundColor: 'grey',
+        borderRadius: 5,
     },
     content_container: {
         flex: 1,

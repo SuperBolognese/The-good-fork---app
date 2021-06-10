@@ -69,11 +69,7 @@ class Login extends Component {
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text
-                        style={styles.title}
-                    >
-                        The good Fork
-                    </Text>
+                    <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
@@ -105,8 +101,8 @@ class Login extends Component {
                         onPress= {() => this.props.navigation.navigate('Register')}
                         style = {styles.touchable}
                     >
-                        <View style={styles.login_button}>
-                            <Text style={styles.button_text}>
+                        <View style={styles.login_button1}>
+                            <Text style={styles.button_text1}>
                                 S'enregistrer
                             </Text>
                         </View>
@@ -122,6 +118,10 @@ const styles = StyleSheet.create({
         width: '80%',
         margin: 10
     },
+    logo: {
+        position: 'absolute',
+        top:-110,
+    },
     title: {
         marginBottom: 50,
         fontSize: 30
@@ -134,25 +134,45 @@ const styles = StyleSheet.create({
     inputView:{
         borderBottomWidth: 1,
         width: '80%',
-        margin: 10
+        margin: 10,
+        top: 100,
     },
+    
     button: {
         marginTop: 10
     },
     container: {
         flex: 1,
+        backgroundColor: '#faf3dd'
     },
     login_button: {
-        backgroundColor: "black",
+        backgroundColor: '#5e6472',
         width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        top: 200,
+        borderRadius: 7,
+    },
+    login_button1: {
+        backgroundColor: '#5e6472',
+        width: 450,
+        height: 70,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        bottom: -575,
     },
     button_text: {
         color: "white",
         fontSize: 15
+    },
+    button_text1: {
+        color: "white",
+        fontSize: 17,
     },
 })
 

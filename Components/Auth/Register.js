@@ -43,11 +43,7 @@ class Register extends Component {
         return(
             <View style={styles.content}>
                 <View style={styles.main_container}>
-                    <Text
-                        style={styles.title}
-                    >
-                        The good Fork
-                    </Text>
+                <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                     <View style={styles.inputView}>
                         <TextInput 
                             style={styles.input}
@@ -107,6 +103,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: '50%'
     },
+    logo: {
+        top: -110,
+    },
     input: {
         width: '80%',
         margin: 10
@@ -117,15 +116,18 @@ const styles = StyleSheet.create({
         margin: 10
     },
     content: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#faf3dd',
     },
     login_button: {
-        backgroundColor: "black",
+        backgroundColor: "#5e6472",
         width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 150,
+        borderRadius: 7,
     },
     button_text: {
         color: "white",
