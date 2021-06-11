@@ -134,14 +134,15 @@ const styles = StyleSheet.create({
         marginTop: 25,
     },
     login_button: {
-        backgroundColor: "black",
-        width: 250,
+        backgroundColor: '#5e6472',
+        width: '70%',
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
         borderRadius: 7,
+        marginBottom: 10,
     },
     button_text: {
         color: "white",
@@ -153,11 +154,14 @@ const styles = StyleSheet.create({
     },
     bottomTabButton: {
         margin: 10,
-        backgroundColor: "black",
+        backgroundColor: "#5e6472",
         height: 50,
+        width: '25%',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderRadius: 7,
+        marginBottom: 25,
     },
     bottomTabBar: {
         flexDirection: 'row',

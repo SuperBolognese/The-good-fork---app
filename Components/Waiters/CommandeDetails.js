@@ -9,7 +9,7 @@ class CommandeDetails extends Component {
 
     render(){
         return (
-            <ScrollView>
+            <ScrollView style={styles.scrollV}>
                 <View style={styles.list_container}>
                     {this.props.navigation.state.params.listePlats.map((item) => {
                         return(<ListeCommandePlatsComponent namePlat={item.namePlat} qty={item.qty} key={item.id }/>)
@@ -21,8 +21,13 @@ class CommandeDetails extends Component {
 }
 
 styles = StyleSheet.create({
+    scrollV: {
+        backgroundColor: '#faf3dd',
+    },
     list_container: {
-        marginTop: 50
+        flex:1,
+        backgroundColor: '#faf3dd',
+        marginTop: 50,
     }
 })
 

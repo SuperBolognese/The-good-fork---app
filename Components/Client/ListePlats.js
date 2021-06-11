@@ -61,16 +61,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     login_button: {
-        backgroundColor: '#5e6472',
-        width: 250,
+        backgroundColor: "#5e6472",
+        width: '80%',
         height: 50,
+        borderRadius: 7,
+        marginTop: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 100,
-        marginTop: 30,
-        borderRadius: 7,
-        
     },
     button_text: {
         color: "white",
@@ -79,6 +77,7 @@ const styles = StyleSheet.create({
     },
     main_container: {
         backgroundColor:"#faf3dd",
+        
 
     },
 })

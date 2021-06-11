@@ -38,6 +38,7 @@ class PlatsWaiter extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
+        backgroundColor: '#faf3dd',
         flexDirection: 'row',
         height: 140,
         width: '95%',
@@ -74,12 +75,13 @@ const styles = StyleSheet.create({
     },
     login_button: {
         marginTop: 10,
-        backgroundColor: "black",
+        backgroundColor: '#5e6472',
         width: 180,
         height: 30,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 7,
     },
     button_text: {
         color: "white",

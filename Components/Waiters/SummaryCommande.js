@@ -186,25 +186,27 @@ class SummaryCommande extends Component {
 
     render() {
         return( 
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
                 { this.state.commande.map((item) => {
                     return( <ListeCommandePlatsComponent typePlat={item.categorie} id={item.id_plat} namePlat={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
                 })}
-                <Text>Total : {this.state.total} €</Text>
+                <Text style={styles.textPrix}>Total : {this.state.total} €</Text>
+                <Text style={styles.textNum}>Numéro de table : </Text>
+                <Text style={styles.textDetail}>Des détails ? </Text>
                 <TextInput 
-                    style={styles.input}
+                    style={styles.inputTable}
                     name="numTable"
                     keyboardType = "numeric"
-                    placeholder = "Numéro de table"
+                    placeholder = "No"
                     onChangeText = { (value) => this.numTable = value }
                 />
                 <TextInput 
-                    style={styles.input}
+                    style={styles.inputDetail}
                     name="numTable"
-                    placeholder = "Des détails ?"
+                    placeholder = "Details"
                     onChangeText = { (value) => this.details = value }
                 />
-                <Text>
+                <Text style={styles.textService}>
                     Sélectionner le service : 
                 </Text>
                  <View style={styles.hourPicker}>
@@ -222,11 +224,9 @@ class SummaryCommande extends Component {
                     onPress= {this.prepareBodyForCommand}
                     style = {styles.touchable}
                 >
-                    <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             Envoyer la commande
                         </Text>
-                    </View>
                 </TouchableOpacity>
             </ScrollView>
         )
@@ -234,18 +234,68 @@ class SummaryCommande extends Component {
 }
 
 const styles = StyleSheet.create({
-    login_button: {
+    scroll: {
+        backgroundColor: '#faf3dd',
+        flexDirection: "column",
+        flex: 1,
+    },
+
+    touchable: {
         marginTop: 10,
-        backgroundColor: "black",
+        borderRadius: 7,
+        backgroundColor: "#5e6472",
         width: 250,
         height: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        top: 175,
+        marginBottom: 225,
+
     },
     button_text: {
         color: "white",
         fontSize: 17
+    },
+    textNum: {
+        marginLeft: 10,
+        marginTop: 70,
+        fontSize: 20, 
+    },
+    inputTable: {
+        borderBottomWidth: 0.5,
+        width: '50%',
+        marginTop: 40,
+        fontSize: 20,
+        left: '45%',
+        bottom: 88,
+    },
+    textDetail: {
+        top: 50,
+        marginLeft: 10, 
+        fontSize: 20,
+    },
+    inputDetail: {
+        borderBottomWidth: 0.5,
+        width: '60%',
+        fontSize: 20,
+        left: '35%',
+        bottom: 38,
+
+    },
+    textPrix: {
+        marginTop: 20,
+        marginLeft: 10,
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    textService: {
+        marginLeft: 10,
+        fontSize: 20,
+    },
+    hourPicker: {
+        alignSelf: 'center',
+        bottom: 15,
     },
 })
 

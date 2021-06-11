@@ -71,13 +71,13 @@ class WaiterDashboard extends Component {
                         <Text style={styles.button_text}>Valider</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.bottomTabButton}
+                        style={styles.bottomTabButton1}
                         onPress = {() => this.props.navigation.navigate('ListePlatsWaiter')}
                     >
                         <Text style={styles.button_text}>Prendre</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.bottomTabButton}
+                        style={styles.bottomTabButton2}
                         onPress = {() => this.props.navigation.navigate('CommandsToSend')}
                     >
                         <Text style={styles.button_text}>Récupérer</Text>
@@ -90,15 +90,38 @@ class WaiterDashboard extends Component {
 
 const styles = StyleSheet.create({
     list_container: {
-        marginTop: 50
+        marginTop: 50,
+        flex:1,
+        backgroundColor:'#faf3dd',
     },
     bottomTabButton: {
         margin: 10,
-        backgroundColor: "black",
+        backgroundColor: '#5e6472',
         height: 50,
+        width: '25%',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row'
+        borderRadius: 7,
+    },
+    bottomTabButton1: {
+        margin: 10,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '25%', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 7,
+    },
+    bottomTabButton2: {
+        margin: 10,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '25%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 7,
     },
     bottomTabBar: {
         flexDirection: 'row',

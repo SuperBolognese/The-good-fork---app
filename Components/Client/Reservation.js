@@ -137,7 +137,9 @@ class Reservation extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#faf3dd',
-        height: '100%',
+        flexDirection: "column",
+        flex: 1,
+        justifyContent: "space-between",
     },
     title: {
         marginLeft: 10,
@@ -149,7 +151,6 @@ const styles = StyleSheet.create({
     },
     datePick: {
         backgroundColor: '#faf3dd',
-        marginTop: 25,
     },
     textDate: {
         marginBottom: 20,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
     },
     textNb: {
-        top: 200,
+
     },
     text1: {
         fontSize: 17,
@@ -171,11 +172,11 @@ const styles = StyleSheet.create({
         left: 200 
     },
     touchable: {
-        marginTop: 400,
+        marginBottom: 50,
     },  
     pickheure: {
         alignSelf: 'center',
-        bottom: 30,
+        bottom: '10%',
     },
     login_button: {
         backgroundColor: '#5e6472',
@@ -184,7 +185,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        bottom: 60,
         borderRadius: 7,
     },
     button_text: {

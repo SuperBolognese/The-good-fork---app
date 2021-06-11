@@ -43,32 +43,38 @@ class CommandListComponent extends Component {
 
     render() {
         return (
-            <TouchableOpacity
-                style = { styles.main_container }
-                onPress = { this.goToDetails }
-            >
-                <View style={styles.content_container}>
-                    <View style={styles.text_container}>
-                        <Text style={styles.destination_text}>{this.state.destination}</Text>
+            <View style={styles.main}>
+                <TouchableOpacity
+                    style = { styles.main_container }
+                    onPress = { this.goToDetails }
+                >
+                    <View style={styles.content_container}>
+                        <View style={styles.text_container}>
+                            <Text style={styles.destination_text}>{this.state.destination}</Text>
+                        </View>
                     </View>
-                </View>
-                <TouchableOpacity onPress={ this.validateCommand }>
-                    <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                    <TouchableOpacity onPress={ this.validateCommand }>
+                        <Image source = {require('../../images_static/validation_icon.png')} style={styles.validate_order} />
+                    </TouchableOpacity>
                 </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    main: {
+        backgroundColor: '#faf3dd',
+    },
     main_container: {
         flexDirection: 'row',
         height: 100,
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
+        borderWidth: 0.90,
+        borderColor: '#ffa69e',
+        borderRadius: 5,
         flex: 1
     },
     image: {
@@ -91,7 +97,9 @@ const styles = StyleSheet.create({
     },
     destination_text: {
         fontSize: 20,
-        color: 'green'
+        color: 'green',
+        alignSelf: 'center',
+        marginTop: 30,
     },
 });
 

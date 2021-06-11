@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import CommandsToSendListComponent from './CommandsToSendListComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Config from  '../../config.json';
@@ -71,7 +71,7 @@ class CommandsToSend extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={styles.scrollMain}>
                 <View style={styles.list_container}>
                     {this.state.data.map((item) => {
                         return(<CommandsToSendListComponent id={item.id} idTable={item.idTable} namePlat={item.namePlat} qty={item.qty} key={item.id } validateOrder={this.validateOrder} />)
@@ -81,5 +81,13 @@ class CommandsToSend extends Component {
         )
     }
 }
-
+const styles = StyleSheet.create({
+    scrollMain: {
+        backgroundColor: '#faf3dd',
+    },
+    list_container: {
+        flex: 1,
+        backgroundColor: '#faf3dd'
+    },
+})
 export default CommandsToSend;

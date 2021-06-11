@@ -82,18 +82,20 @@ class DetailsPlat extends Component {
                         style = { styles.dish_title }
                     >{this.props.navigation.state.params.dish_name}
                     </Text>
+                    <Text style = { styles.titledescription }>Description : </Text>
                     <Text
                         style = { styles.description }
                     >
                         {this.props.navigation.state.params.description}
                     </Text>
-                    <Text>
-                        { this.props.navigation.state.params.prix}€
+                    <Text style = { styles.prix }>
+                        prix : { this.props.navigation.state.params.prix}€
                     </Text>
                     <TextInput 
                         placeholder = "Quantité"
                         keyboardType = "numeric"
                         onChangeText = { (value) => this.qty = value }
+                        style = { styles.quantite }
                     />
 
                 </View>
@@ -101,11 +103,10 @@ class DetailsPlat extends Component {
                     onPress= {this.addToBasket}
                     style = {styles.touchable}
                 >
-                    <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             Ajouter au panier
                         </Text>
-                    </View>
+
                 </TouchableOpacity>
             </View>
         )
@@ -113,9 +114,15 @@ class DetailsPlat extends Component {
 }
 
 const styles = StyleSheet.create({
-    content: {
-        marginTop: 20,
+    main_container: {
+        flex: 1,
+        flexDirection: "column",
         backgroundColor:"#faf3dd",
+        justifyContent: "space-between",
+    },
+    content: {
+        backgroundColor:"#faf3dd",
+        bottom: '18%',
     },
     dish_title: {
         alignSelf: 'center',
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
     },
     image_container:{
         width: '100%',
-        height: '40%',
+        height: '22%',
     },
     image: {
         flex: 1,
@@ -131,22 +138,24 @@ const styles = StyleSheet.create({
         width: undefined,
         height: undefined
     },
+    titledescription: {
+        marginTop: 20,
+        fontSize: 20,
+        marginLeft: 10,
+        marginBottom: 5,
+    },
     description: {
         width: '95%',
         alignSelf: 'center',
-        marginTop: 70,
+        marginTop: 15,
+        fontSize: 15,
     },
-    login_button: {
-        marginBottom: 40,
-        backgroundColor: "#5e6472",
-        width: '80%',
-        height: 50,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 7,
-        position: 'absolute',
-        bottom: -350,
+    prix:{
+        marginTop: 30,
+        marginBottom: 30,
+        marginLeft: 10,
+        fontWeight: 'bold',
+        fontSize: 16,
     },
     button_text: {
         color: "white",
@@ -154,13 +163,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     touchable: {
-        justifyContent: 'flex-end',
-        flex: 1,
+        backgroundColor: "#5e6472",
+        width: '80%',
+        height: 50,
+        borderRadius: 7,
+        marginBottom: '10%',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    main_container: {
-        backgroundColor:"#faf3dd",
-    }
-
+    quantite: {
+        marginLeft: 10,
+        fontSize: 16,
+    },
 })
 
 export default DetailsPlat;

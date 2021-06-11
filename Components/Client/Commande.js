@@ -149,44 +149,46 @@ class Commande extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <View style={styles.flatlist}>
-                    { this.state.commande.map((item) => {
-                        return( <CommandeListComponent id={item.id_plat} dish_name={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
-                    })}
-                </View>
-                <Text>Total : {this.state.total} €</Text>
-                <Text>
-                    Heure à laquelle vous récupérez votre commande :
-                </Text>
-                <View style={styles.hourPicker}>
-                    <Picker
-                        selectedValue={this.state.selectedService}
-                        style={{ height: 50, width: 150 }}
-                        onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
-                    >
-                        {this.state.services.map((item, index) => {
-                            return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
-                        })} 
-                    </Picker>
-                </View>
-                <Text>Des détails à nous donner ? :</Text>
-                <TextInput 
-                    style={styles.input}
-                    name="details"
-                    placeholder = "Des détails ?"
-                    onChangeText = { (value) => this.details = value }
-                />
-                <TouchableOpacity
-                    onPress= {this.prepareBodyForCommand}
-                    style = {styles.touchable}
-                >
-                    <View style={styles.login_button}>
-                        <Text style={styles.button_text}>
-                            Passer au paiement
-                        </Text>
+            <ScrollView style={styles.scroll}>
+                <View style={styles.main_container}>
+                    <View style={styles.flatlist}>
+                        { this.state.commande.map((item) => {
+                            return( <CommandeListComponent id={item.id_plat} dish_name={item.NamePlat} qty = {item.qty} prix = {item.prix} imageUrl = {item.imageUrl} navigation={this.props.navigation} key={item.id_plat} deleteCommandeElement = {this.deleteCommandeElement} />)
+                        })}
                     </View>
-                </TouchableOpacity>
+                    <Text style={styles.textTotal}>Total : {this.state.total} €</Text>
+                    <Text style={styles.hourText}>
+                        Heure à laquelle vous récupérez votre commande :
+                    </Text>
+                    <View style={styles.hourPicker}>
+                        <Picker
+                            selectedValue={this.state.selectedService}
+                            style={{ height: 50, width: 150 }}
+                            onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
+                        >
+                            {this.state.services.map((item, index) => {
+                                return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
+                            })} 
+                        </Picker>
+                    </View>
+                    <Text style={styles.textDetail}>Des détails à nous donner ? :</Text>
+                    <TextInput 
+                        style={styles.input}
+                        name="details"
+                        placeholder = "Details"
+                        onChangeText = { (value) => this.details = value }
+                    />
+                    <TouchableOpacity
+                        onPress= {this.prepareBodyForCommand}
+                        style = {styles.touchable}
+                    >
+                        <View style={styles.login_button}>
+                            <Text style={styles.button_text}>
+                                Passer au paiement
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         )
     }
@@ -194,7 +196,9 @@ class Commande extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        marginBottom: 20,
+
+        backgroundColor: '#faf3dd',
+        flex: 1,
     },
     flatlist: {
         marginTop: 50,
@@ -221,8 +225,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
-        position: 'absolute',
-        top: 190,
+        marginTop: 50,
+        marginBottom: 50,
     },
     button_text: {
         color: "white",
@@ -239,6 +243,17 @@ const styles = StyleSheet.create({
     },
     scroll: {
         backgroundColor: '#faf3dd',
+    },
+    textDetail: {
+        marginTop: 150,
+        marginLeft: 10,
+        fontSize: 17,
+    },
+    input: {
+        marginLeft: '60%',
+        fontSize: 17,
+        bottom: 20,
+
     },
 })
 

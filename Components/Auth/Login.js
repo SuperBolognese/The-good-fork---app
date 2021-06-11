@@ -91,21 +91,17 @@ class Login extends Component {
                         onPress= {this._handleSubmit}
                         style = {styles.touchable}
                     >
-                        <View style={styles.login_button}>
                             <Text style={styles.button_text}>
                                 Se connecter
                             </Text>
-                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress= {() => this.props.navigation.navigate('Register')}
-                        style = {styles.touchable}
+                        style = {styles.touchable1}
                     >
-                        <View style={styles.login_button1}>
                             <Text style={styles.button_text1}>
                                 S'enregistrer
                             </Text>
-                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -119,8 +115,8 @@ const styles = StyleSheet.create({
         margin: 10
     },
     logo: {
-        position: 'absolute',
-        top:-110,
+        position: "absolute",
+        bottom: 200,
     },
     title: {
         marginBottom: 50,
@@ -143,28 +139,29 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#faf3dd'
+        flexDirection: "column",
+        backgroundColor:"#faf3dd",
+        justifyContent: "space-between",
     },
-    login_button: {
-        backgroundColor: '#5e6472',
-        width: 250,
+    touchable: {
+        backgroundColor: "#5e6472",
+        width: '80%',
         height: 50,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 200,
         borderRadius: 7,
-    },
-    login_button1: {
-        backgroundColor: '#5e6472',
-        width: 450,
-        height: 70,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'absolute',
-        bottom: -575,
+        bottom: -150,
+    },
+    touchable1: {
+        backgroundColor: "#5e6472",
+        width: '80%',
+        height: 50,
+        borderRadius: 7,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -400,
     },
     button_text: {
         color: "white",
