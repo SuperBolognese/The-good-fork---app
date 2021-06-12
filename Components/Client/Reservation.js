@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput  } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json';
 
@@ -15,7 +15,8 @@ class Reservation extends Component {
             lastName: "",
             services: [],
             selectedService: '',
-            nbPersonnes: 1
+            nbPersonnes: 1,
+            details: "Non"
         }
 
         this.prepareBodyForAPI = this.prepareBodyForAPI.bind(this);
@@ -78,10 +79,27 @@ class Reservation extends Component {
             numberPersons: this.state.nbPersonnes,
             tableID: 0,
             serviceID: serviceIdTemp,
-            data: dateAEnvoyer
+            date: dateAEnvoyer,
+            Details: this.state.details
         }
 
-        console.log(apiBody);
+        this.sendReservation(JSON.stringify(apiBody))
+    }
+
+    sendReservation(body) {
+        fetch(Config.baseURL + '/api/Bookings/NewBooking', {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + this.state.token,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: body
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.props.navigation.navigate('ReservationDone');
+        })
     }
 
     render() {
@@ -97,27 +115,38 @@ class Reservation extends Component {
                         height= {100}
                         value={this.state.date}
                         onChange={(value) => this.setState({date : value})}
-                />
-                </View>
+                    />
+                    </View>
 
-                <View style={styles.pickheure}>
-                    <Picker 
-                        selectedValue={this.state.selectedService}
-                        style={{ height: 50, width: 150 }}
-                        onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
-                    >
-                        {this.state.services.map((item, index) => {
-                            return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
-                        })} 
-                    </Picker>
-                </View>
+                    <View style={styles.pickheure}>
+                        <Picker 
+                            selectedValue={this.state.selectedService}
+                            style={{ height: 50, width: 150 }}
+                            onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
+                        >
+                            {this.state.services.map((item, index) => {
+                                return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
+                            })} 
+                        </Picker>
+                    </View>
 
-                <View style={styles.textNb}>
-                    <Text style={styles.text1}>Nombre de personnes : </Text>
-                    <Text style={styles.text2}>{this.state.nbPersonnes}</Text>
-                </View>
-
-
+                    <View style={styles.textNb}>
+                        <TextInput 
+                            style={styles.input}
+                            name="nbPersons"
+                            keyboardType='numeric'
+                            placeholder = "Combien de personnes ?"
+                            onChangeText = { (value) => this.state.nbPersonnes = value }
+                        />
+                    </View>
+                    <View style={styles.textNb}>
+                        <TextInput 
+                            style={styles.input}
+                            name="nbPersons"
+                            placeholder = "Des détails à nous donner ?"
+                            onChangeText = { (value) => this.state.details = value }
+                        />
+                    </View>
 
                 <TouchableOpacity
                     onPress= {() => this.prepareBodyForAPI() }
@@ -158,8 +187,9 @@ const styles = StyleSheet.create({
         marginTop: 35,
         fontSize: 17,
     },
-    textNb: {
-
+    input: {
+        borderColor: 'black',
+        borderRadius: 10
     },
     text1: {
         fontSize: 17,

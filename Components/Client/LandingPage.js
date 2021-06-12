@@ -1,11 +1,31 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import Toast from 'react-native-root-toast';
 
 class LandingPage extends Component {
 
     constructor() {
         super();
+
+        this.redirectUserIfConnected = this.redirectUserIfConnected.bind(this);
+    }
+
+    componentDidMount() {
+        this.redirectUserIfConnected();
+    }
+
+    async redirectUserIfConnected() {//redirection en fonction du type d'utilisateur
+        let job = await AsyncStorage.getItem('job');
+        if (job === "waiter") {
+            this.props.navigation.navigate('WaiterDashboard')
+        } else if (job === 'cook') {
+            this.props.navigation.navigate('CookDashboard')
+        } else if (job === 'barman') {
+            this.props.navigation.navigate('BarmanDashboard')
+        } else {
+            this.props.navigation.navigate('LandingPage')
+        }
     }
 
     async emptyStorage() {

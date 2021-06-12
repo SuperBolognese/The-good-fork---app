@@ -84,6 +84,12 @@ class WaiterDashboard extends Component {
                     >
                         <Text style={styles.button_text}>Récupérer</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.bottomTabButton2}
+                        onPress = {() => this.props.navigation.navigate('ReservationsWaiter')}
+                    >
+                        <Text style={styles.button_text}>Réservations</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         );

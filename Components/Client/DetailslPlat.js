@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
+import Toast from 'react-native-root-toast';
 import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 
 class DetailsPlat extends Component {
@@ -9,12 +10,13 @@ class DetailsPlat extends Component {
         this.commande = [];
         this.qty = 0;
         this.isExist = false;
+        this.token = "";
 
         this.addToBasket = this.addToBasket.bind(this);
     }
 
     componentDidMount() {
-        this.getCommandFromStorage().done();
+        this.getCommandFromStorage();
     }
 
     async getCommandFromStorage(){
@@ -24,21 +26,18 @@ class DetailsPlat extends Component {
         } else {
             this.commande = []
         }
-    }
-
-    async isUserConnected() {
         const token = await AsyncStorage.getItem('token');
-        console.log(token);
-        if(token != null) {
-           return true;
-        } else {
-            return false;
-        }
+        this.token = token;
     }
 
     addToBasket() {
-        if(this.isUserConnected().done()) {
-            this.props.navigation.navigate('Login');
+        if(this.token == null) {
+            Toast.show('Vous devez être connecté pour commander !', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
         } else {
             this.commande.forEach(element => {
                 if(element.id_plat === this.props.navigation.state.params.id) {
@@ -59,6 +58,12 @@ class DetailsPlat extends Component {
                 }
                 this.commande.push(element);
             }
+            Toast.show('Ajouté 1 au panier !', {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
             this.addCommandToStorage(this.commande);
         }
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Config from '../../config.json';
 import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import NavBar from '../Shared/Navbar';
+import Toast from 'react-native-root-toast';
 
 class Login extends Component {
 
@@ -35,12 +35,21 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            this.setStorageValue('firstName', res.firstName);
-            this.setStorageValue('lastName', res.lastName);
-            this.setStorageValue('job', res.job);
-            this.setStorageValue('token', res.token);
-            this.setStorageValue('userId', res.clientID.toString())
-            this.checkUserJob(res.job);
+            if(res.title) {
+                Toast.show('Commande envoyée avec succès !', {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true
+                });
+            } else {
+                this.setStorageValue('firstName', res.firstName);
+                this.setStorageValue('lastName', res.lastName);
+                this.setStorageValue('job', res.job);
+                this.setStorageValue('token', res.token);
+                this.setStorageValue('userId', res.clientID.toString())
+                this.checkUserJob(res.job);
+            }
         })
         .catch((error) => console.error(error))
     }
@@ -89,7 +98,7 @@ class Login extends Component {
                     </View>
                     <TouchableOpacity
                         onPress= {this._handleSubmit}
-                        style = {styles.touchable}
+                        style={styles.touchable}
                     >
                             <Text style={styles.button_text}>
                                 Se connecter
@@ -127,7 +136,9 @@ const styles = StyleSheet.create({
         margin: 10,
         top: '40%',
     },
-    
+    touchable: {
+        alignItems: 'flex-end'
+    },
     button: {
         marginTop: 10
     },

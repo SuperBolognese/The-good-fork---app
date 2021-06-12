@@ -46,11 +46,15 @@ class Commande extends Component {
         const command = await AsyncStorage.getItem('commande');
         const userId = await AsyncStorage.getItem('userId');
         const token = await AsyncStorage.getItem('token');
-        this.setState({
-            commande: JSON.parse(command),
-            userId: userId,
-            token: token
-        });
+        if(command != null) {
+            this.setState({
+                commande: JSON.parse(command),
+                userId: userId,
+                token: token
+            });
+        } else {
+            
+        }
         if (this.state.commande) {
             this.calculateTotal();
         }
@@ -171,7 +175,7 @@ class Commande extends Component {
                             })} 
                         </Picker>
                     </View>
-                    <Text style={styles.textDetail}>Des détails à nous donner ? :</Text>
+                    <Text style={styles.textDetail}>Des détails à nous donner ? : </Text>
                     <TextInput 
                         style={styles.input}
                         name="details"

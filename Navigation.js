@@ -15,6 +15,7 @@ import ListePlatsWaiter from './Components/Waiters/ListePlatsWaiter';
 import CommandsToSend from './Components/Waiters/CommandsToSend';
 import PlatsWaiter from './Components/Waiters/PlatsWaiter';
 import SummaryCommande from './Components/Waiters/SummaryCommande';
+import ReservationsWaiter from './Components/Waiters/ReservationsWaiter';
 
 import Payment from './Components/Client/Payment';
 import ListePlats from './Components/Client/ListePlats';
@@ -23,6 +24,7 @@ import DetailsPlat from './Components/Client/DetailslPlat';
 import LandingPage from './Components/Client/LandingPage';
 import Commande from './Components/Client/Commande';
 import Reservation from './Components/Client/Reservation';
+import ReservationDone from './Components/Client/ReservationDone';
 
 const stackNavigatorOptions = {
     headerShown: false
@@ -47,7 +49,9 @@ const AppNavigator = createStackNavigator({
     PlatsWaiter: { screen: PlatsWaiter },
     SummaryCommande: { screen: SummaryCommande },
     CommandeDetailsCook: { screen: CommandeDetailsCook },
-    CommandeDetailsBarman: { screen: CommandeDetailsBarman }
+    CommandeDetailsBarman: { screen: CommandeDetailsBarman },
+    ReservationDone: { screen: ReservationDone },
+    ReservationsWaiter : { screen: ReservationsWaiter }
 },
 {
     defaultNavigationOptions: stackNavigatorOptions

@@ -1,4 +1,6 @@
-import React, {cloneElement, Component} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { Component } from 'react';
+import Toast from 'react-native-root-toast';
 
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Plats from './Plats';
@@ -26,6 +28,31 @@ class ListePlats extends Component {
                 }
             ],
         };
+        this.token = "";
+
+        this.gotToCommande = this.gotToCommande.bind(this);
+    }
+
+    componentDidMount() {
+        this.getTokenFromStorage();
+    }
+
+    async getTokenFromStorage() {
+        const token = await AsyncStorage.getItem('token');
+        this.token = token;
+    }
+
+    gotToCommande() {
+        if(this.token == null) {
+            Toast.show('Vous devez être connecté pour commander !', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
+        } else {
+            this.props.navigation.navigate('Commande');
+        }
     }
 
     render() {
@@ -36,7 +63,7 @@ class ListePlats extends Component {
                     return (<Plats menuItem={item.dish} navigation={this.props.navigation} key={item.id}/>)
                 })}
                 <TouchableOpacity
-                    onPress= {() => this.props.navigation.navigate('Commande')} 
+                    onPress= {this.gotToCommande} 
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
