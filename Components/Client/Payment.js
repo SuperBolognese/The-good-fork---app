@@ -20,7 +20,6 @@ class Payment extends Component {
 
     componentDidMount() {
         this.isUserConnected().done();
-        this.isUserConnected();
     }
 
     onSubmitPayment() {
@@ -59,6 +58,7 @@ class Payment extends Component {
                 shadow: true,
                 animation: true
             });
+            this.props.navigation.navigate('LandingPage');
         })
         .catch(error => {
             console.log(error);
@@ -104,7 +104,7 @@ class Payment extends Component {
                     />
                 </View>
                 <TouchableOpacity
-                    onPress= {() => this.onSubmitPayment() }
+                    onPress=  { this.onSubmitPayment }
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>

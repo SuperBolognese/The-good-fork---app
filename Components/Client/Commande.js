@@ -14,7 +14,9 @@ class Commande extends Component {
             total: 0,
             services: [],
             userId: 0,
-            selectedService: ""
+            selectedService: "",
+            idTable: 0,
+            reservation: []
         }
         this.details = "Rien";
         this.fullBody = {};
@@ -125,7 +127,7 @@ class Commande extends Component {
             IDService: serviceIdTemp, 
             date: dateAEnvoyer,
             idCustomer: this.state.userId,
-            idTable: 0,
+            idTable: this.state.idTable,
             nbPerson: 0,
             state: 0,
             Detail: this.details

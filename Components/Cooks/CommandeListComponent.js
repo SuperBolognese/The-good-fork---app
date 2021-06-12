@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 25
     },
     qty: {
-        fontSize: 50,
+        fontSize: 25,
         margin: 20
     },
     namePlat: {

@@ -4,6 +4,7 @@ import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json';
 
 import DatePicker from '@dietime/react-native-date-picker';
+import Toast from 'react-native-root-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Reservation extends Component {
@@ -19,6 +20,7 @@ class Reservation extends Component {
             details: "Non"
         }
 
+        this.todayDate = new Date();
         this.prepareBodyForAPI = this.prepareBodyForAPI.bind(this);
     }
 
@@ -68,22 +70,45 @@ class Reservation extends Component {
             }
         })
 
+        const actualDate = new Date();
+        const actualMonth = (actualDate.getMonth()+1);
+        const actualDay = (actualDate.getDate());
+
         const date = this.state.date;
         const year = (date.getFullYear());
         const month = (date.getMonth()+1);
         const day = (date.getDate());
-        const dateAEnvoyer = day + "-" +month+"-"+year;
-        
-        const apiBody = {
-            customerName: this.state.lastName,
-            numberPersons: this.state.nbPersonnes,
-            tableID: 0,
-            serviceID: serviceIdTemp,
-            date: dateAEnvoyer,
-            Details: this.state.details
-        }
+        const dateAEnvoyer = year + "-" +month+"-"+day;
 
-        this.sendReservation(JSON.stringify(apiBody))
+        if(actualMonth > month || actualMonth === month && actualDay > day) {
+            Toast.show("Veuillez entrer une date ultérieure à celle d'aujourd'hui", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
+        } else {
+            const apiBody = {
+                customerName: this.state.lastName,
+                numberPersons: this.state.nbPersonnes,
+                tableID: 0,
+                serviceID: serviceIdTemp,
+                date: dateAEnvoyer,
+                Details: this.state.details
+            }
+    
+            if(this.state.token == null) {
+                Toast.show("Vous devez être connecté pour réserver une table", {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true
+                });
+            } else {
+                this.sendReservation(JSON.stringify(apiBody))
+                AsyncStorage.setItem('reservation', apiBody);
+            }
+        }
     }
 
     sendReservation(body) {
@@ -111,42 +136,42 @@ class Reservation extends Component {
                 <Text style={styles.textDate}>Selectionnez une date à laquelle vous souhaitez réserver : </Text>
                 <View style={styles.datePick}>
                     <DatePicker
-                        startYear = {2021}
+                        startYear = {this.todayDate.getFullYear()}
                         height= {100}
                         value={this.state.date}
                         onChange={(value) => this.setState({date : value})}
                     />
-                    </View>
+                </View>
 
-                    <View style={styles.pickheure}>
-                        <Picker 
-                            selectedValue={this.state.selectedService}
-                            style={{ height: 50, width: 150 }}
-                            onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
-                        >
-                            {this.state.services.map((item, index) => {
-                                return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
-                            })} 
-                        </Picker>
-                    </View>
+                <View style={styles.pickheure}>
+                    <Picker 
+                        selectedValue={this.state.selectedService}
+                        style={{ height: 50, width: 150 }}
+                        onValueChange={(itemValue, itemIndex) => this.setState({selectedService: itemValue})}
+                    >
+                        {this.state.services.map((item, index) => {
+                            return (< Picker.Item label={item.hourOfService} value={item.hourOfService} key={item.id}/>);
+                        })} 
+                    </Picker>
+                </View>
 
-                    <View style={styles.textNb}>
-                        <TextInput 
-                            style={styles.input}
-                            name="nbPersons"
-                            keyboardType='numeric'
-                            placeholder = "Combien de personnes ?"
-                            onChangeText = { (value) => this.state.nbPersonnes = value }
-                        />
-                    </View>
-                    <View style={styles.textNb}>
-                        <TextInput 
-                            style={styles.input}
-                            name="nbPersons"
-                            placeholder = "Des détails à nous donner ?"
-                            onChangeText = { (value) => this.state.details = value }
-                        />
-                    </View>
+                <View style={styles.textNb}>
+                    <TextInput 
+                        style={styles.input}
+                        name="nbPersons"
+                        keyboardType='numeric'
+                        placeholder = "Combien de personnes ?"
+                        onChangeText = { (value) => this.state.nbPersonnes = value }
+                    />
+                </View>
+                <View style={styles.textNb}>
+                    <TextInput 
+                        style={styles.input}
+                        name="nbPersons"
+                        placeholder = "Des détails à nous donner ?"
+                        onChangeText = { (value) => this.state.details = value }
+                    />
+                </View>
 
                 <TouchableOpacity
                     onPress= {() => this.prepareBodyForAPI() }

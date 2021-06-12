@@ -43,7 +43,7 @@ class LandingPage extends Component {
                >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
-                            Sur place
+                            Réserver une table
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -52,7 +52,7 @@ class LandingPage extends Component {
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
-                            A emporter
+                            Consulter la carte
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -70,7 +70,7 @@ class LandingPage extends Component {
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
-                            Page Login
+                            Me connecter
                         </Text>
                     </View>
                 </TouchableOpacity>
