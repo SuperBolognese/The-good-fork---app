@@ -62,9 +62,11 @@ class BarmanDashboard extends Component {
     render() {
         return (
             <ScrollView style={styles.list_container}>
-                { this.state.commandes.map((item) => {
-                    return ( <DrinkListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} tableId={item.commande.idTable} /> )
-                })}
+                <View style={styles.main_container}>
+                    { this.state.commandes.map((item) => {
+                        return ( <DrinkListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} tableId={item.commande.idTable} /> )
+                    })}
+                </View>
             </ScrollView>
         );
     }
@@ -72,7 +74,10 @@ class BarmanDashboard extends Component {
 
 const styles = StyleSheet.create({
     list_container: {
-        marginTop: 60
+        backgroundColor: '#faf3dd'
+    },
+    main_container: {
+        marginTop: 50,
     }
 })
 

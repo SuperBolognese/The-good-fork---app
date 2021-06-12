@@ -56,9 +56,13 @@ const styles = StyleSheet.create({
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        flex: 1
+        borderWidth: 0.9,
+        borderColor: '#ffa69e',
+        borderRadius: 5,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
     },
     content_container: {
         flex: 1,

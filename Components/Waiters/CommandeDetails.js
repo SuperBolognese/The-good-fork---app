@@ -27,7 +27,7 @@ styles = StyleSheet.create({
     list_container: {
         flex:1,
         backgroundColor: '#faf3dd',
-        marginTop: 50,
+
     }
 })
 

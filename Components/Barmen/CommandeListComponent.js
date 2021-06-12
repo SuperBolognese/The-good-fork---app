@@ -29,13 +29,15 @@ class CommandeListComponent extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
+        backgroundColor: '#faf3dd',
         flexDirection: 'row',
         height: 130,
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
+        borderWidth: 0.9,
+        borderRadius: 5,
+        borderColor: '#ffa69e',
         flex: 1,
         alignItems: 'center',
     },
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     },
     namePlat: {
         width: '50%',
-        margin: 20
+        margin: 20,
     }
 })
 

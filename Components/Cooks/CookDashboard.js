@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import Config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import DishListComponent from './DishListComponent';
 
 //component dashboard des cooks qui affiche une liste avec toutes les commandes, par ordre d'arrivée 
@@ -58,19 +58,24 @@ class CookDashboard extends Component {
 
     render() {
         return (
-            <ScrollView>
-                {this.state.commandes.map((item) => {
-                    return( <DishListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} idTable={item.commande.idTable} /> )
-                })}
+            <ScrollView style={styles.list_container}>
+                <View style={styles.liste}>
+                    {this.state.commandes.map((item) => {
+                        return( <DishListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} idTable={item.commande.idTable} /> )
+                    })}
+                </View>
             </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    list_container: {
-        marginTop: 60
-    }
+    list_container:{
+        backgroundColor: '#faf3dd',
+    },
+    liste: {
+        marginTop: 50,
+    },
 })
 
 export default CookDashboard;

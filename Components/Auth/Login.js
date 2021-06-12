@@ -112,26 +112,20 @@ class Login extends Component {
 const styles = StyleSheet.create({
     input: {
         width: '80%',
-        margin: 10
+        margin: 10,
     },
     logo: {
-        position: "absolute",
-        bottom: 200,
-    },
-    title: {
-        marginBottom: 50,
-        fontSize: 30
+        top: '20%',
     },
     content: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '50%'
     },
     inputView:{
         borderBottomWidth: 1,
         width: '80%',
         margin: 10,
-        top: 100,
+        top: '40%',
     },
     
     button: {
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        bottom: -150,
+        top: '50%',
     },
     touchable1: {
         backgroundColor: "#5e6472",
@@ -161,7 +155,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        bottom: -400,
+        top: '90%',
+        marginTop: 20,
+        marginBottom: 50,
+
     },
     button_text: {
         color: "white",

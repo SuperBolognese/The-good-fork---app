@@ -99,8 +99,8 @@ class Register extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
+
         alignItems: 'center',
-        justifyContent: 'center',
         marginTop: '50%'
     },
     logo: {
@@ -117,7 +117,9 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        backgroundColor: '#faf3dd',
+        flexDirection: "column",
+        backgroundColor:"#faf3dd",
+        justifyContent: "space-between",
     },
     login_button: {
         backgroundColor: "#5e6472",
@@ -126,8 +128,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 150,
         borderRadius: 7,
+        marginTop: 40,
+
+
+
     },
     button_text: {
         color: "white",

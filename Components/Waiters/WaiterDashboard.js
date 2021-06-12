@@ -61,9 +61,11 @@ class WaiterDashboard extends Component {
     render() {
         return (
             <ScrollView style={styles.list_container}>
+                <View style={styles.item1}>
                 {this.state.data.map((item) => {
                     return ( <CommandListComponent token={this.token} idCommande={item.commande.id} navigation={this.props.navigation} commande={item} key={item.commande.id} validateOrder={this.validateOrder} /> )
                 })}
+                </View>
                 <View style={styles.bottomTabBar}>
                     <TouchableOpacity
                         style={styles.bottomTabButton}
@@ -90,9 +92,11 @@ class WaiterDashboard extends Component {
 
 const styles = StyleSheet.create({
     list_container: {
-        marginTop: 50,
         flex:1,
         backgroundColor:'#faf3dd',
+    },
+    item1: {
+        marginTop: 50,
     },
     bottomTabButton: {
         margin: 10,
@@ -110,8 +114,9 @@ const styles = StyleSheet.create({
         width: '25%', 
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
         borderRadius: 7,
+        bottom: 0,
     },
     bottomTabButton2: {
         margin: 10,

@@ -29,13 +29,15 @@ class CommandeListComponent extends Component {
 
 const styles = StyleSheet.create({
     main_container: {
+        backgroundColor: '#faf3dd',
         flexDirection: 'row',
         height: 130,
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
+        borderWidth: 0.90,
+        borderColor: '#ffa69e',
+        borderRadius: 5,
         flex: 1,
         alignItems: 'center',
     },

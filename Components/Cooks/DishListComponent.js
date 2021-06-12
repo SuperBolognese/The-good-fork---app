@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
         width: '95%',
         marginBottom: 10,
         margin: 10,
-        borderWidth: 1,
-        borderColor: 'black',
+        borderWidth: 0.90,
+        borderColor: '#ffa69e',
+        borderRadius: 5,
         flex: 1
     },
     image: {
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     },
     command_taker: {
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
     },
     validate_order: {
         width: 40,
