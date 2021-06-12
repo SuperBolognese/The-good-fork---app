@@ -85,7 +85,7 @@ class WaiterDashboard extends Component {
                         <Text style={styles.button_text}>Récupérer</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.bottomTabButton2}
+                        style={styles.bottomTabButton3}
                         onPress = {() => this.props.navigation.navigate('ReservationsWaiter')}
                     >
                         <Text style={styles.button_text}>Réservations</Text>
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     bottomTabButton: {
-        margin: 10,
+        margin: 3,
         backgroundColor: '#5e6472',
         height: 50,
-        width: '25%',
+        width: '23%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
     },
     bottomTabButton1: {
-        margin: 10,
+        margin: 3,
         backgroundColor: '#5e6472',
         height: 50,
-        width: '25%', 
+        width: '23%', 
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'flex-end',
@@ -125,10 +125,20 @@ const styles = StyleSheet.create({
         bottom: 0,
     },
     bottomTabButton2: {
-        margin: 10,
+        margin: 3,
         backgroundColor: '#5e6472',
         height: 50,
-        width: '25%',
+        width: '23%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 7,
+    },
+    bottomTabButton3: {
+        margin: 3,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '24%',
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',

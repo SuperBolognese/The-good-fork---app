@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Config from '../../config.json';
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import ReservationsWaiterListComponent from './ReservationWaiterListComponent';
 
 class ReservationsWaiter extends Component {
@@ -56,15 +56,35 @@ class ReservationsWaiter extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <Text>Réservation du jour</Text>
+            <View style={styles.main_container}>
+                <ScrollView style={StyleSheet.mainScroll}>
+                    <View style={styles.main_container}>
+                    <Text style={styles.textStyle}>Réservations du jour</Text>
                 
-                {this.state.reservations.map((item) => {
-                    return (<ReservationsWaiterListComponent key={item.id} customerName={item.customerName} tableID={item.tableID} service={item.serviceString} numberPersons={item.numberPersons} />)
-                })}
-            </ScrollView>
+                    {this.state.reservations.map((item) => {
+                        return (<ReservationsWaiterListComponent key={item.id} customerName={item.customerName} tableID={item.tableID} service={item.serviceString} numberPersons={item.numberPersons} />)
+                    })}
+                    </View>
+                </ScrollView>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    mainScroll: {
+        flex:1,
+        backgroundColor: '#faf3dd',
+    },
+    main_container: {
+        flex:1,
+        backgroundColor: '#faf3dd',
+    },
+    textStyle: {
+        marginTop: 50,
+        fontSize: 20,
+        marginLeft: 10,
+    },
+})
 
 export default ReservationsWaiter;
