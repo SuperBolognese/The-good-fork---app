@@ -45,6 +45,7 @@ class ListePlatsWaiter extends Component {
 
     checkDishType(res) {
         let dish_data = []
+        
         res.forEach(element => {
             dish_data.push(element);
         });

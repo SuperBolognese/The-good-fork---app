@@ -25,7 +25,9 @@ class WaiterDashboard extends Component {
     }
 
     async getCommandesFromAPI() {
+        console.log('CACA')
         const token = await AsyncStorage.getItem('token');
+        console.log(token);
         this.token = token;
         fetch(Config.baseURL + '/api/Commandes/getListCommandeByState?state=0',{
             method: 'GET',

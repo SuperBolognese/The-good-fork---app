@@ -40,11 +40,27 @@ class ReservationsWaiter extends Component {
         const year = (date.getFullYear());
         const month = (date.getMonth()+1);
         const day = (date.getDate());
-        const todayDate = day + "-" +month+"-"+year;
+        let todayDate = "";
+        if (parseInt(day) < 10 ) {
+            if (parseInt(month) < 10) {
+                todayDate = year + "-0" +month+"-0"+ day;
+            } else {
+                todayDate = year + "-" +month+"-0"+ day;
+            }
+        } else if(parseInt(month) < 10) {
+            if (parseInt(day) < 10) {
+                todayDate = year + "-0" +month+"-0"+ day;
+            } else {
+                todayDate = year + "-0" +month+"-"+ day;
+            }
+        } else {
+            todayDate = year + "-" +month+"-"+ day;
+        }
+        
         let todayBookings = []
 
         reservations.forEach(element => {
-            if(element.date === todayDate) {
+            if(element.date == todayDate) {
                 todayBookings.push(element);
             }
         });

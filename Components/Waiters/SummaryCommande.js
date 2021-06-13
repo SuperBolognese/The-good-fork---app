@@ -94,9 +94,11 @@ class SummaryCommande extends Component {
         let hours = [];
 
         res.forEach(element => {
-            if(element.hourOfService.substring(0,2) >= currentHour) {
-                hours.push(element);
-            }
+            // if(element.hourOfService.substring(0,2) >= currentHour) {
+            //     hours.push(element);
+            // }
+            hours.push(element);
+
         });
         this.setState({
             services: hours,
