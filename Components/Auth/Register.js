@@ -11,6 +11,9 @@ class Register extends Component {
         this.lastName = "";
         this.email = "";
         this.password ="";
+
+        this._handleSubmit = this._handleSubmit.bind(this);
+        this._register = this._register.bind(this);
     }
 
     _handleSubmit(event) {
@@ -130,9 +133,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 7,
         marginTop: 40,
-
-
-
     },
     button_text: {
         color: "white",

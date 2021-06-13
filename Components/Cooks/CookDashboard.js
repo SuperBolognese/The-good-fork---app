@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import Config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet,TouchableOpacity, Text } from 'react-native';
 import DishListComponent from './DishListComponent';
 
 //component dashboard des cooks qui affiche une liste avec toutes les commandes, par ordre d'arrivée 
@@ -56,12 +56,31 @@ class CookDashboard extends Component {
         }
     }
 
+    async emptyStorage() {
+        AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => {
+            this.props.navigation.navigate('LandingPage');
+        });
+    }
+
     render() {
         return (
             <ScrollView style={styles.list_container}>
+                <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.liste}>
                     {this.state.commandes.map((item) => {
-                        return( <DishListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} idTable={item.commande.idTable} /> )
+                        return( <DishListComponent token={this.token} listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} idTable={item.commande.idTable} /> )
                     })}
                 </View>
             </ScrollView>
@@ -74,7 +93,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#faf3dd',
     },
     liste: {
-        marginTop: 50,
+        marginTop: 20,
+    },
+    deconnexion: {
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: "#5e6472",
+        width: 100,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 7,
+        margin: 10
+    },
+    view: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15,
+        fontWeight: 'bold',
     },
 })
 

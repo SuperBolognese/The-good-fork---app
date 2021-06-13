@@ -60,7 +60,7 @@ class ListePlatsWaiter extends Component {
         } else {
             this.commande = []
         }
-    }
+    } 
 
     addToBasket(id, namePLat, prix, qty, typePlat) {
         this.commande.forEach(element => {
@@ -113,15 +113,22 @@ class ListePlatsWaiter extends Component {
                         <Text style={styles.button_text}>Valider</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.bottomTabButton}
+                        style={styles.bottomTabButton1}
+                        onPress = {() => this.props.navigation.navigate('ListePlatsWaiter')}
                     >
                         <Text style={styles.button_text}>Prendre</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.bottomTabButton}
+                        style={styles.bottomTabButton2}
                         onPress = {() => this.props.navigation.navigate('CommandsToSend')}
                     >
                         <Text style={styles.button_text}>Récupérer</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.bottomTabButton3}
+                        onPress = {() => this.props.navigation.navigate('ReservationsWaiter')}
+                    >
+                        <Text style={styles.button_text}>Réservation</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -153,19 +160,53 @@ const styles = StyleSheet.create({
         backgroundColor:"#faf3dd",
     },
     bottomTabButton: {
-        margin: 10,
-        backgroundColor: "#5e6472",
+        margin: 3,
+        backgroundColor: '#5e6472',
         height: 50,
-        width: '25%',
+        width: '23%',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
         borderRadius: 7,
-        marginBottom: 25,
+    },
+    bottomTabButton1: {
+        margin: 3,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '23%', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'flex-end',
+        borderRadius: 7,
+        bottom: 0,
+    },
+    bottomTabButton2: {
+        margin: 3,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '23%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 7,
+    },
+    bottomTabButton3: {
+        margin: 3,
+        backgroundColor: '#5e6472',
+        height: 50,
+        width: '24%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 7,
     },
     bottomTabBar: {
         flexDirection: 'row',
         justifyContent: 'center'
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15,
+        fontWeight: 'bold',
     },
 })
 

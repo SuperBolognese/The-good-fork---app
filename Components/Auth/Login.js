@@ -36,7 +36,7 @@ class Login extends Component {
         .then(res => res.json())
         .then(res => {
             if(res.title) {
-                Toast.show('Commande envoyée avec succès !', {
+                Toast.show('Saisie incorrecte. Veuillez réessayer', {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.BOTTOM,
                     shadow: true,

@@ -31,16 +31,29 @@ class LandingPage extends Component {
     async emptyStorage() {
         AsyncStorage.getAllKeys()
         .then(keys => AsyncStorage.multiRemove(keys))
-        .then(() => alert('success'));
+        .then(() => {
+            this.props.navigation.navigate('LandingPage');
+        });
     }
 
     render() {
         return (
             <View style = {styles.main_container}>
+                <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                 <TouchableOpacity
                     onPress= {() => this.props.navigation.navigate('Reservation')}
-               >
+                >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             Réserver une table
@@ -53,15 +66,6 @@ class LandingPage extends Component {
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
                             Consulter la carte
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress= {() => this.emptyStorage().done() }
-                >
-                    <View style={styles.login_button}>
-                        <Text style={styles.button_text}>
-                            Vider la commande
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -104,9 +108,22 @@ const styles = StyleSheet.create({
     logo: {
         alignItems: 'center',
         marginBottom: 150,
-
-    }
-
+    },
+    deconnexion: {
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: "#5e6472",
+        width: 100,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 7,
+        margin: 10
+    },
+    view: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    },
 })
 
 export default LandingPage;

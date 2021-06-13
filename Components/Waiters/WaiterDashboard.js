@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Config from '../../config.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-root-toast';
 
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CommandListComponent from './CommandListComponent';
@@ -15,6 +16,8 @@ class WaiterDashboard extends Component {
 
         this.token ="";
         this.updateState = this.updateState.bind(this);
+        this.getCommandesFromAPI = this.getCommandesFromAPI.bind(this);
+        this.validateOrder = this.validateOrder.bind(this);
     }
 
     componentDidMount() {
@@ -32,7 +35,7 @@ class WaiterDashboard extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            //console.log(res);
+            console.log(res);
             this.updateState(res);
         });
     }
@@ -52,18 +55,42 @@ class WaiterDashboard extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.getCommandesFromAPI();
+            Toast.show('Commande validée !', {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true
+            });
         })
         .catch(error => console.log(error))
+    }
+
+    async emptyStorage() {
+        AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => {
+            this.props.navigation.navigate('LandingPage');
+        });
     }
 
     render() {
         return (
             <ScrollView style={styles.list_container}>
+                 <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.item1}>
                 {this.state.data.map((item) => {
-                    return ( <CommandListComponent token={this.token} idCommande={item.commande.id} navigation={this.props.navigation} commande={item} key={item.commande.id} validateOrder={this.validateOrder} /> )
+                    return ( <CommandListComponent token={this.token} idCommande={item.commande.id} navigation={this.props.navigation} commande={item} key={item.commande.id} validateOrder={this.validateOrder} details={item.commande.detail} /> )
                 })}
                 </View>
                 <View style={styles.bottomTabBar}>
@@ -88,7 +115,7 @@ class WaiterDashboard extends Component {
                         style={styles.bottomTabButton3}
                         onPress = {() => this.props.navigation.navigate('ReservationsWaiter')}
                     >
-                        <Text style={styles.button_text}>Réservations</Text>
+                        <Text style={styles.button_text}>Réservation</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -102,7 +129,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#faf3dd',
     },
     item1: {
-        marginTop: 50,
+        marginTop: 20,
     },
     bottomTabButton: {
         margin: 3,
@@ -153,6 +180,21 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
     },
+    deconnexion: {
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: "#5e6472",
+        width: 100,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 7,
+        margin: 10
+    },
+    view: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    }
 })
 
 export default WaiterDashboard;

@@ -94,14 +94,8 @@ class DetailsPlat extends Component {
                         {this.props.navigation.state.params.description}
                     </Text>
                     <Text style = { styles.prix }>
-                        prix : { this.props.navigation.state.params.prix}€
+                        Prix : { this.props.navigation.state.params.prix}€
                     </Text>
-                    <TextInput 
-                        placeholder = "Quantité"
-                        keyboardType = "numeric"
-                        onChangeText = { (value) => this.qty = value }
-                        style = { styles.quantite }
-                    />
 
                 </View>
                 <TouchableOpacity

@@ -34,6 +34,7 @@ class CommandListComponent extends Component {
     goToDetails() {
         this.props.navigation.navigate('CommandeDetails', {
             listePlats: this.props.commande.listCommande,
+            details: this.props.details
         });
     }
 

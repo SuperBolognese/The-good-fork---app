@@ -15,7 +15,8 @@ class DishListComponent extends Component {
 
     goToDetails() {
         this.props.navigation.navigate('CommandeDetailsCook', {
-            commande: this.props.listCommande
+            commande: this.props.listCommande,
+            token: this.props.token
         });
     }
 

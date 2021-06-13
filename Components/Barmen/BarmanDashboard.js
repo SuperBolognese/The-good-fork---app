@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Config from '../../config.json';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, ScrollView, StyleSheet, View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrinkListComponent from './DrinkListComponent';
 
@@ -11,6 +11,8 @@ class BarmanDashboard extends Component {
         this.state = {
             commandes: []
         };
+
+        this.token ="";
 
         this.getCommandesFromAPI = this.getCommandesFromAPI.bind(this);
         this.updateState = this.updateState.bind(this);
@@ -39,32 +41,48 @@ class BarmanDashboard extends Component {
         let listePlats = [];
         res.forEach(commande => {
             commande.listCommande.forEach(element => {
-                if(element.typePlat == "Boisson" && element.state < 1) {
+                if(element.typePlat === "Boisson" && element.state < 1) {
                     listePlats.push(element);
                 }
             });
             commande.listCommande = listePlats;
             listePlats = []
         });
-        let listCommande = [];
-        res.forEach(element => {
-            if(element.listCommande.length != 0) {
-                listCommande.push(element);
-            }
-            element = listCommande;
-            listCommande = [];
+
+        const result = res.filter(element => element.listCommande.length > 0);
+        
+        if(res.length != 0){
+            this.setState({
+                commandes: result
+            });
+        }
+    }
+
+    async emptyStorage() {
+        AsyncStorage.getAllKeys()
+        .then(keys => AsyncStorage.multiRemove(keys))
+        .then(() => {
+            this.props.navigation.navigate('LandingPage');
         });
-        this.setState({
-            commandes: res
-        })
     }
 
     render() {
         return (
             <ScrollView style={styles.list_container}>
+                <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.main_container}>
                     { this.state.commandes.map((item) => {
-                        return ( <DrinkListComponent listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} tableId={item.commande.idTable} /> )
+                        return ( <DrinkListComponent token={this.token} listCommande={item.listCommande} key={item.commande.id} commande={item.commande} navigation={this.props.navigation} tableId={item.commande.idTable} /> )
                     })}
                 </View>
             </ScrollView>
@@ -77,8 +95,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#faf3dd'
     },
     main_container: {
-        marginTop: 50,
-    }
+        marginTop: 20,
+    },
+    deconnexion: {
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: "#5e6472",
+        width: 100,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 7,
+        margin: 10
+    },
+    view: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    },
+    button_text: {
+        color: "white",
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
 })
 
 export default BarmanDashboard;

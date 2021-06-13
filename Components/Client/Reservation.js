@@ -71,8 +71,8 @@ class Reservation extends Component {
         })
 
         const actualDate = new Date();
-        const actualMonth = (actualDate.getMonth()+1);
-        const actualDay = (actualDate.getDate());
+        const actualMonth = actualDate.getMonth()+1;
+        const actualDay = actualDate.getDate();
 
         const date = this.state.date;
         const year = (date.getFullYear());
@@ -81,6 +81,7 @@ class Reservation extends Component {
         const dateAEnvoyer = year + "-" +month+"-"+day;
 
         if(actualMonth > month || actualMonth === month && actualDay > day) {
+            console.log('ANTERIEUR');
             Toast.show("Veuillez entrer une date ultérieure à celle d'aujourd'hui", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
@@ -96,7 +97,6 @@ class Reservation extends Component {
                 date: dateAEnvoyer,
                 Details: this.state.details
             }
-    
             if(this.state.token == null) {
                 Toast.show("Vous devez être connecté pour réserver une table", {
                     duration: Toast.durations.LONG,
@@ -106,7 +106,6 @@ class Reservation extends Component {
                 });
             } else {
                 this.sendReservation(JSON.stringify(apiBody))
-                AsyncStorage.setItem('reservation', apiBody);
             }
         }
     }
@@ -123,7 +122,19 @@ class Reservation extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            this.props.navigation.navigate('ReservationDone');
+            if(res.result === "Il n'y a plus de places pour cet horaire.") {
+                Toast.show("Il n'y a plus de places pour cet horaire.", {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true
+                });
+            } else {
+                this.props.navigation.navigate('ReservationDone');
+            }
+        })
+        .catch(error => {
+            console.log(error);
         })
     }
 
@@ -174,8 +185,8 @@ class Reservation extends Component {
                 </View>
 
                 <TouchableOpacity
-                    onPress= {() => this.prepareBodyForAPI() }
-                    style = {styles.touchable}
+                    onPress= {this.prepareBodyForAPI}
+                    style={styles.touchable}
                 >
                     <View style={styles.login_button}>
                         <Text style={styles.button_text}>
@@ -193,13 +204,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#faf3dd',
         flexDirection: "column",
         flex: 1,
-        justifyContent: "space-between",
+        justifyContent: 'space-between',
     },
     title: {
         marginLeft: 10,
         marginTop: 45,
         fontSize: 40,
-        color: "#5e6472",
+        color: '#5e6472',
         fontWeight: 'bold',
         marginBottom: 20,
     },
@@ -243,7 +254,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
     },
     button_text: {
-        color: "white",
+        color: 'white',
         fontSize: 15
     },
 })

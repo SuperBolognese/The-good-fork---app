@@ -81,7 +81,7 @@ class Payment extends Component {
                     Informations de paiement
                 </Text>
                 <View style={styles.inputView}>
-                    <Text>Credit card number</Text>
+                    <Text>Numéro de carte bancaire</Text>
                     <TextInput 
                         style={styles.input}
                         keyboardType = 'numeric'
@@ -89,14 +89,14 @@ class Payment extends Component {
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text>Expiricy date</Text>
+                    <Text>Date d'expiration</Text>
                     <TextInput 
                         style={styles.input}
                         placeholder = "MM/AA"
                     />
                 </View>
                 <View style={styles.inputView}>
-                    <Text>Cryptogram</Text>
+                    <Text>Cryptogramme visuel</Text>
                     <TextInput 
                         style={styles.input}
                         keyboardType = 'numeric'

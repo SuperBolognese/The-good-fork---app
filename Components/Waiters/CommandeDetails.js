@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import ListeCommandePlatsComponent from './ListeCommandePlatsComponent';
 
 class CommandeDetails extends Component {
@@ -15,6 +15,8 @@ class CommandeDetails extends Component {
                         return(<ListeCommandePlatsComponent namePlat={item.namePlat} qty={item.qty} key={item.id }/>)
                     })}
                 </View>
+                <Text style={styles.detailsTitle}>Les demandes du client :</Text>
+                <Text style={styles.details}>{this.props.navigation.state.params.details}</Text>
             </ScrollView>
         )
     }
@@ -28,6 +30,14 @@ styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#faf3dd',
 
+    },
+    detailsTitle: {
+        fontSize: 20,
+        alignSelf: 'center'
+    },
+    details: {
+        fontSize: 15,
+        alignSelf: 'center'
     }
 })
 

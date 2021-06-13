@@ -18,10 +18,6 @@ class Plats extends Component {
                 onPress={this.navigateToMenuList}
             >
                 <View style={styles.main_container}>
-                    <Image
-                        source={{uri : "image"}}
-                        style={styles.image}
-                    />
                     <View style={styles.content_container}>
                             <Text style={styles.command_taker}>{this.props.menuItem}</Text>
                     </View>

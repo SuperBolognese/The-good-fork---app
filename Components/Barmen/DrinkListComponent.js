@@ -33,8 +33,10 @@ class DrinkListComponent extends Component {
     }
 
     goToDetails() {
+        console.log(this.props.token)
         this.props.navigation.navigate('CommandeDetailsBarman', {
-            commande: this.props.listCommande
+            commande: this.props.listCommande,
+            token: this.props.token
         });
     }
 

@@ -11,8 +11,7 @@ class ReservationsWaiterListComponent extends Component {
             <View style={styles.main_container}>
                 <View style={styles.textStyle}>
                     <Text>Mme/Mr {this.props.customerName}</Text>
-                    <Text>Numéro de table : {this.props.tableID}</Text>
-                    <Text>Heure de réservation : {this.props.service}</Text>
+                    <Text>Réservé pour le {this.props.service}</Text>
                     <Text>Nombre de personnes : {this.props.numberPersons}</Text>
                 </View>
             </View>
