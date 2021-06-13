@@ -76,17 +76,6 @@ class WaiterDashboard extends Component {
     render() {
         return (
             <ScrollView style={styles.list_container}>
-                 <View style={styles.view}>
-                    <TouchableOpacity
-                        onPress= {() => this.emptyStorage() }
-                    >
-                        <View style={styles.deconnexion}>
-                            <Text style={styles.button_text}>
-                                Déconnexion
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.item1}>
                 {this.state.data.map((item) => {
                     return ( <CommandListComponent token={this.token} idCommande={item.commande.id} navigation={this.props.navigation} commande={item} key={item.commande.id} validateOrder={this.validateOrder} details={item.commande.detail} /> )
@@ -115,6 +104,17 @@ class WaiterDashboard extends Component {
                         onPress = {() => this.props.navigation.navigate('ReservationsWaiter')}
                     >
                         <Text style={styles.button_text}>Réservation</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -172,8 +172,11 @@ const styles = StyleSheet.create({
     },
     bottomTabBar: {
         flexDirection: 'row',
-        justifyContent: 'center'
-    },
+        justifyContent: 'center',
+        marginTop: 30,
+        alignSelf: 'center',
+
+        },
     button_text: {
         color: "white",
         fontSize: 15,
@@ -191,9 +194,9 @@ const styles = StyleSheet.create({
         margin: 10
     },
     view: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    }
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',    }
 })
 
 export default WaiterDashboard;

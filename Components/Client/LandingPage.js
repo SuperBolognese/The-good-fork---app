@@ -39,17 +39,6 @@ class LandingPage extends Component {
     render() {
         return (
             <View style = {styles.main_container}>
-                <View style={styles.view}>
-                    <TouchableOpacity
-                        onPress= {() => this.emptyStorage() }
-                    >
-                        <View style={styles.deconnexion}>
-                            <Text style={styles.button_text}>
-                                Déconnexion
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
                 <Image source = {require('../../images_static/logo_small1.png')} style={styles.logo} />
                 <TouchableOpacity
                     onPress= {() => this.props.navigation.navigate('Reservation')}
@@ -78,6 +67,17 @@ class LandingPage extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
+                <View style={styles.view}>
+                    <TouchableOpacity
+                        onPress= {() => this.emptyStorage() }
+                    >
+                        <View style={styles.deconnexion}>
+                            <Text style={styles.button_text}>
+                                Déconnexion
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -110,15 +110,13 @@ const styles = StyleSheet.create({
         marginBottom: 150,
     },
     deconnexion: {
-        marginTop: 20,
-        marginBottom: 10,
+        marginBottom: 30,
         backgroundColor: "#5e6472",
-        width: 100,
+        width: 250,
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
-        margin: 10
     },
     view: {
         flexDirection: 'row',

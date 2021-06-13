@@ -110,7 +110,11 @@ const styles = StyleSheet.create({
     },
     view: {
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        marginTop: 20, 
+        justifyContent: 'center',
+        alignSelf: 'center', 
+        alignItems: 'center',
+        marginBottom: 30,
     },
     button_text: {
         color: "white",
