@@ -57,7 +57,7 @@ class CommandsToSend extends Component {
         fetch(Config.baseURL + '/api/Commandes/StateCommande?id=' + commandId, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + this.token
+                'Authorization': 'Bearer ' + this.state.token
             }
         })
         .then(res => res.json())
