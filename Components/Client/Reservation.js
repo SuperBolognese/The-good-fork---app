@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput  } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Modal  } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import Config from '../../config.json';
 
-import DatePicker from '@dietime/react-native-date-picker';
+import {CalendarList} from "react-native-common-date-picker";
 import Toast from 'react-native-root-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,15 +12,20 @@ class Reservation extends Component {
         super();
         this.state = {
             token: '',
-            date: "",
+            date: this.todayDate,
             lastName: "",
             services: [],
             selectedService: '',
             nbPersonnes: 1,
-            details: "Non"
+            details: "Non",
+            visible: false
         }
 
         this.todayDate = new Date();
+        const year = this.todayDate.getFullYear();
+        const actualMonth = this.todayDate.getMonth()+1;
+        const actualDay = this.todayDate.getDate();
+        this.actualDate = year + "-"  + actualMonth + "-" + actualDay;
         this.prepareBodyForAPI = this.prepareBodyForAPI.bind(this);
     }
 
@@ -63,49 +68,30 @@ class Reservation extends Component {
 
     prepareBodyForAPI() {
         let serviceIdTemp = "";
-
         this.state.services.forEach(element => {
             if(element.hourOfService === this.state.selectedService){
                 serviceIdTemp = element.id
             }
         })
 
-        const actualDate = new Date();
-        const actualMonth = actualDate.getMonth()+1;
-        const actualDay = actualDate.getDate();
+        const apiBody = {
+            customerName: this.state.lastName,
+            numberPersons: this.state.nbPersonnes,
+            tableID: 0,
+            serviceID: serviceIdTemp,
+            date: this.state.date,
+            Details: this.state.details
+        }
 
-        const date = this.state.date;
-        const year = (date.getFullYear());
-        const month = (date.getMonth()+1);
-        const day = (date.getDate());
-        const dateAEnvoyer = year + "-" +month+"-"+day;
-
-        if(actualMonth > month || actualMonth === month && actualDay > day) {
-            Toast.show("Veuillez entrer une date ultérieure à celle d'aujourd'hui", {
+        if(this.state.token == null) {
+            Toast.show("Vous devez être connecté pour réserver une table", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
                 shadow: true,
                 animation: true
             });
         } else {
-            const apiBody = {
-                customerName: this.state.lastName,
-                numberPersons: this.state.nbPersonnes,
-                tableID: 0,
-                serviceID: serviceIdTemp,
-                date: dateAEnvoyer,
-                Details: this.state.details
-            }
-            if(this.state.token == null) {
-                Toast.show("Vous devez être connecté pour réserver une table", {
-                    duration: Toast.durations.LONG,
-                    position: Toast.positions.BOTTOM,
-                    shadow: true,
-                    animation: true
-                });
-            } else {
-                this.sendReservation(JSON.stringify(apiBody))
-            }
+            this.sendReservation(JSON.stringify(apiBody))
         }
     }
 
@@ -145,12 +131,30 @@ class Reservation extends Component {
                 > Réserver une table </Text>
                 <Text style={styles.textDate}>Selectionnez une date à laquelle vous souhaitez réserver : </Text>
                 <View style={styles.datePick}>
-                    <DatePicker
-                        startYear = {this.todayDate.getFullYear()}
-                        height= {100}
-                        value={this.state.date}
-                        onChange={(value) => this.setState({date : value})}
-                    />
+                    <TouchableOpacity
+                        onPress= {() => this.setState({visible: true})}
+                        style={styles.touchable}
+                    >
+                        <View style={styles.login_button}>
+                            <Text style={styles.button_text}>
+                                Choisir une date
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                <Modal animationType={'slide'} visible={this.state.visible}>
+                    <CalendarList
+                        minDate={this.actualDate}
+                        maxDate="2050-06-01"
+                        containerStyle={{marginTop: 20}}
+                        cancel={() => this.setState({visible: false})}
+                        confirm={data => {
+                            this.setState({
+                                date: data[0],
+                                visible: false,
+                            });
+                        }}
+                        />
+                    </Modal>
                 </View>
 
                 <View style={styles.pickheure}>
