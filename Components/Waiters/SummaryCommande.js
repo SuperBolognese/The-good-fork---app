@@ -162,7 +162,6 @@ class SummaryCommande extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.emptyCommande();
             Toast.show('Commande envoyée avec succès !', {
                 duration: Toast.durations.LONG,

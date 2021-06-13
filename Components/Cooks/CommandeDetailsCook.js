@@ -52,7 +52,6 @@ class CommandeDetailsCook extends Component {
             <ScrollView style={styles.mainScroll}>
                 <View style={styles.main_container}>
                     {this.state.commande.map((item) => {
-                        console.log(item);
                         return( <CommandeListComponent id={item.id} namePlat={item.namePlat} qty={item.qty} key={item.id} validateOrder={this.validateOrder}/>)
                     })}
                 </View>

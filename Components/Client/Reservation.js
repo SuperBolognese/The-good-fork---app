@@ -81,7 +81,6 @@ class Reservation extends Component {
         const dateAEnvoyer = year + "-" +month+"-"+day;
 
         if(actualMonth > month || actualMonth === month && actualDay > day) {
-            console.log('ANTERIEUR');
             Toast.show("Veuillez entrer une date ultérieure à celle d'aujourd'hui", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,

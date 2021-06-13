@@ -38,7 +38,6 @@ class Payment extends Component {
     }
 
     sendCommande(commande) {
-        console.log(commande);
         fetch(Config.baseURL + "/api/Commandes/NewCommande", {
             method: "POST",
             headers: {
@@ -50,7 +49,6 @@ class Payment extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             this.emptyCommande();
             Toast.show('Commande envoyée avec succès !', {
                 duration: Toast.durations.LONG,
